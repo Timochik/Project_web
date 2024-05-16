@@ -1,0 +1,26 @@
+import uvicorn
+from fastapi import FastAPI
+
+# from src.conf.config import settings
+
+app = FastAPI()
+
+# origins = settings.allow_origins
+
+# app.include_router(auth.router, prefix='/api')
+# app.include_router(users.router, prefix='/api')
+    
+
+@app.get("/")
+def read_root():
+    """
+    The read_root function is a function that returns the string &quot;Hello World&quot;
+    in JSON format. This is an example of how to use FastAPI to create a ReST API.
+    
+    :return: A dictionary with a key &quot;message&quot; and
+    :doc-author: Trelent
+    """
+    return {"message": "Hello World"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
