@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     cloudinary_name: str = "name"
     cloudinary_api_key: str = "000000000000000"
     cloudinary_api_secret: str = "secret"
+    cloudinary_folder_name: str = "project_web"
 
     class Config:
         extra = "ignore"

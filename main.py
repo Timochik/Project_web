@@ -16,4 +16,4 @@ def read_root():
     return {"message": "Hello World"}
     
 if __name__ == '__main__':
-    uvicorn.run(app, host='localhost', port=8000)
+    uvicorn.run(app, host='localhost', port=8000, reload=True)
