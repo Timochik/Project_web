@@ -1,11 +1,11 @@
 
 
-from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey
+from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey, func
+
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from db import Base
-
 
 
 class User(Base):
@@ -44,7 +44,6 @@ class Post(Base):
     hashtags = relationship("Hashtag", secondary=post_hashtags, back_populates="posts")
 
 
-
 class Hashtag(Base):
     __tablename__ = "hashtags"
 
@@ -52,3 +51,13 @@ class Hashtag(Base):
     name = Column(String, index=True)
 
     posts = relationship("Post", secondary=post_hashtags, back_populates="hashtags")
+
+
+class Tag(Base):
+    __tablename__ = "tags"
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True, index=True)
+    created_at = Column(DateTime, default=func.now())
+
+    def __repr__(self):
+        return self.name
