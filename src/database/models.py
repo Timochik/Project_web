@@ -1,11 +1,11 @@
 
 
 from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey, func
-
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from db import Base
+
 
 
 class User(Base):
@@ -41,23 +41,30 @@ class Post(Base):
     author_id = Column(Integer, ForeignKey("users.id"))
     author = relationship("auth.models.User", back_populates="posts")
 
-    hashtags = relationship("Hashtag", secondary=post_hashtags, back_populates="posts")
-
-
-class Hashtag(Base):
-    __tablename__ = "hashtags"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-
-    posts = relationship("Post", secondary=post_hashtags, back_populates="hashtags")
+    tags = relationship("Tag", secondary=post_hashtags, back_populates="posts")
 
 
 class Tag(Base):
     __tablename__ = "tags"
-    id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True, index=True)
-    created_at = Column(DateTime, default=func.now())
+    id = Column(Integer, primary_key=True, index = True)
+    name = Column(String, unique=True)
+
+    posts = relationship("Post", secondary=post_hashtags, back_populates="tags")
 
     def __repr__(self):
         return self.name
+    
+
+class Comment(Base):
+    __tablename__ = "comments"
+    id = Column(Integer, primary_key=True, index = True)
+    text = Column(String)
+    created_at = Column(DateTime, default=func.now())
+    updated_at = Column(DateTime, default=func.now())
+
+    post_id = Column(Integer, ForeignKey("posts.id"))
+    post = relationship("auth.models.Post", back_populates="comments")
+
+    author_id = Column(Integer, ForeignKey("users.id"))
+    author = relationship("auth.models.User", back_populates="comments")
+    
