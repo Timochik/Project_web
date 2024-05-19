@@ -1,11 +1,17 @@
 
 
-from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey, func
+from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey, func, Enum as SQLAEnum
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from db import Base
+from enum import Enum
 
+
+class UserRole(str, Enum):
+    admin = "admin"
+    user = "user"
+    moderator = "moderator"
 
 
 class User(Base):
@@ -18,6 +24,7 @@ class User(Base):
     name = Column(String)
     hashed_password = Column(String, nullable=False)
     created_dt = Column(DateTime, default=datetime.utcnow())
+    role = Column(SQLAEnum(UserRole), default=UserRole.user)
 
     # profile
     dob = Column(Date)
@@ -67,4 +74,5 @@ class Comment(Base):
 
     author_id = Column(Integer, ForeignKey("users.id"))
     author = relationship("auth.models.User", back_populates="comments")
+
     
