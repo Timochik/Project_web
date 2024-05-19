@@ -162,3 +162,4 @@ cython_debug/
 
 postgres-data
 versions
+.DS_Store
