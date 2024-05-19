@@ -2,18 +2,18 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    sqlalchemy_database_url: str = "postgresql+asyncpg://postgres:111111@localhost:5432/abc"
-    secret_key: str = "1234567890"
-    algorithm: str = "HS256"
-    mail_username: str = "example@mail.com"
-    mail_password: str = "password"
-    mail_from: str = "example@mail.com"
-    mail_port: int = 567234
-    mail_server: str = "mail"
-    cloudinary_name: str = "name"
-    cloudinary_api_key: str = "000000000000000"
-    cloudinary_api_secret: str = "secret"
-    cloudinary_folder_name: str = "project_web"
+    sqlalchemy_database_url: str
+    secret_key: str
+    algorithm: str
+    mail_username: str
+    mail_password: str
+    mail_from: str
+    mail_port: int
+    mail_server: str
+    cloudinary_name: str
+    cloudinary_api_key: str
+    cloudinary_api_secret: str
+    cloudinary_folder_name: str
 
     class Config:
         extra = "ignore"
