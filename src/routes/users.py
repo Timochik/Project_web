@@ -13,7 +13,7 @@ from src.schemas import UserDb
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/me/", response_model=UserDb)
+@router.get("/me", response_model=UserDb)
 async def read_users_me(current_user: User = Depends(auth_service.get_current_user)):
     """
     The read_users_me function is a GET request that returns the current user's information.

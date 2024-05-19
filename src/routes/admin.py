@@ -4,22 +4,22 @@ from pydantic import BaseModel
 
 from src.database.db import get_db
 from src.database.models import User, UserRole
-from src.auth import get_current_active_admin
-from src.schemas import UserOut
-
-router = APIRouter()
+from src.services.auth import auth_service
+from src.schemas import UserOut, RoleChangeRequest
 
 
-class RoleChangeRequest(BaseModel):
-    user_id: int
-    new_role: UserRole
+router = APIRouter(prefix="/admin", tags=["admin"])
+
+# class RoleChangeRequest(BaseModel):
+#     user_id: int
+#     new_role: UserRole
 
 
-@router.put("/users/change-role/", response_model=UserOut)
+@router.put("/change-role", response_model=UserOut)
 async def change_user_role(
     request: RoleChangeRequest,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_active_admin)
+    current_user: User = Depends(auth_service.get_current_user)
 ):
     user_to_update = db.query(User).filter(User.id == request.user_id).first()
     if not user_to_update:
