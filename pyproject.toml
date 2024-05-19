@@ -15,6 +15,7 @@ alembic = "^1.13.1"
 qrcode = "^7.4.2"
 cloudinary = "^1.40.0"
 pydantic-settings = "^2.2.1"
+pytest-cov = "^5.0.0"
 
 
 [build-system]

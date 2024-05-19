@@ -7,7 +7,7 @@ import cloudinary.uploader
 from src.conf.config import settings
 
 
-async def get_qr_code_by_url(url: str) -> str:
+async def get_qr_code_by_url(url: str, service: cloudinary=cloudinary) -> str:
     """
     The get_qr_code_by_url function takes a url as an argument and returns the URL of a QR code image.
     
@@ -30,7 +30,7 @@ async def get_qr_code_by_url(url: str) -> str:
     img.save(b, 'png')
     img_bytes = b.getvalue()
 
-    cloudinary.config(
+    service.config(
         cloud_name=settings.cloudinary_name,
         api_key=settings.cloudinary_api_key,
         api_secret=settings.cloudinary_api_secret,
@@ -39,18 +39,18 @@ async def get_qr_code_by_url(url: str) -> str:
 
     public_id = f'{settings.cloudinary_folder_name}/qrcode/{uuid.uuid4()}'
 
-    r = cloudinary.uploader.upload(
+    service.uploader.upload(
         img_bytes,
         public_id=public_id,
         overwrite=True
     )
 
-    src_url = cloudinary.CloudinaryImage(public_id).build_url()
+    src_url = service.CloudinaryImage(public_id).build_url()
 
     return src_url
 
 
-async def delete_qr_code_by_url(url: str) -> None:
+async def delete_qr_code_by_url(url: str, service: cloudinary=cloudinary) -> None:
     """
     The delete_qr_code_by_url function deletes a QR code from Cloudinary.
     If file not founr raises FileNotFoundError error.
@@ -62,14 +62,15 @@ async def delete_qr_code_by_url(url: str) -> None:
     filename = url.split("/")[-1]
     public_id = f'{settings.cloudinary_folder_name}/qrcode/{filename}'
 
-    cloudinary.config(
+    service.config(
         cloud_name=settings.cloudinary_name,
         api_key=settings.cloudinary_api_key,
         api_secret=settings.cloudinary_api_secret,
         secure=True
     )
 
-    res = cloudinary.uploader.destroy(public_id=public_id)
+    res = service.uploader.destroy(public_id=public_id)
+    print(res)
     if res["result"] != "ok":
         raise FileNotFoundError(
             f"Cloudinary file with public ID '{public_id}' not found"
