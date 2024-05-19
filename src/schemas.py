@@ -46,4 +46,9 @@ class UserOut(BaseModel):
     role: UserRole
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attribute = True
+
+class RoleChangeRequest(BaseModel):
+    user_id: int
+    new_role: UserRole
