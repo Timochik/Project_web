@@ -72,5 +72,5 @@ async def delete_qr_code_by_url(url: str) -> None:
     res = cloudinary.uploader.destroy(public_id=public_id)
     if res["result"] != "ok":
         raise FileNotFoundError(
-            f"Cludinary file with public ID '{public_id}' not found"
+            f"Cloudinary file with public ID '{public_id}' not found"
         )
