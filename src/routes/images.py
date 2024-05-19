@@ -20,11 +20,7 @@ cloudinary.config(
 )
 
 @router.post("/upload") # response_model=ImagesResponse
-# async def upload_file(description: str, tags: str, file: UploadFile = File(...)):
-    # result = cloudinary.uploader.upload(file.file)
-    # return {"message": "Файл завантажено успішно!", "url": result['secure_url'], 'pub_id': result["public_id"], 'description': description, 'tags': tags}
 async def upload_file(description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
     return await repository_images.create_images_post(description, hashtags, current_user, db,  file)
-
 
 
