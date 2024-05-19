@@ -1,13 +1,13 @@
 import uvicorn
 from fastapi import FastAPI
 
-from src.routes import auth, users
+from src.routes import auth, users, admin
 
 app = FastAPI()
 
 app.include_router(auth.router, prefix='/api')
 app.include_router(users.router, prefix='/api')
-    
+app.include_router(admin.router, prefix="/admin", tags=["admin"])
 
 @app.get("/")
 def read_root():
