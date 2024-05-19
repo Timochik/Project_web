@@ -8,20 +8,6 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-
-# class User(Base):
-#     __tablename__ = "users"
-#     id = Column(Integer, primary_key=True, index=True)
-#     email = Column(String, unique=True)
-#     username = Column(String, unique=True)
-#     name = Column(String)
-#     hashed_password = Column(String, nullable=False)
-#     created_dt = Column(DateTime, default=datetime.utcnow())
-
-#     # profile
-#     dob = Column(Date)
-#     bio = Column(String)
-
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
