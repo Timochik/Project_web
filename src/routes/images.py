@@ -1,23 +1,30 @@
-from pathlib import Path
-import shutil
-from fastapi import FastAPI, File, UploadFile, APIRouter
-from fastapi.responses import FileResponse, HTMLResponse
+from typing import List
+from fastapi import APIRouter, Depends, File, Response, UploadFile, requests
+import cloudinary.uploader
+from fastapi.responses import HTMLResponse
+from src.database.models import User
+from src.database.db import get_db
 
+from src.conf.config import settings
+from src.repository import images as repository_images
+
+import cloudinary
+from sqlalchemy.orm import Session
+from src.services.auth import auth_service
 router = APIRouter(prefix='/images', tags=["images"])
 
-@router.post("/upload_image/")
-async def upload_image(file: UploadFile = File(...)):
-    folder = Path('src/server')
+cloudinary.config(
+    cloud_name = settings.cloudinary_name,
+    api_key = settings.cloudinary_api_key,
+    api_secret = settings.cloudinary_api_secret
+)
 
-    image_path = folder / file.filename
+@router.post("/upload") # response_model=ImagesResponse
+# async def upload_file(description: str, tags: str, file: UploadFile = File(...)):
+    # result = cloudinary.uploader.upload(file.file)
+    # return {"message": "Файл завантажено успішно!", "url": result['secure_url'], 'pub_id': result["public_id"], 'description': description, 'tags': tags}
+async def upload_file(description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
+    return await repository_images.create_images_post(description, hashtags, current_user, db,  file)
 
-    with image_path.open("wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-
-    return {"message": f"Image '{file.filename}' uploaded successfully!"}
 
 
-@router.get("/images", response_class=HTMLResponse)
-async def read_image(image_id: str):
-    img_path = f"src/server/{image_id}.jpg"
-    return FileResponse(img_path, media_type="image/jpeg")
