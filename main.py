@@ -1,19 +1,24 @@
-import redis.asyncio as redis
-from fastapi import FastAPI
-from fastapi_limiter import FastAPILimiter
 import uvicorn
-from fastapi.middleware.cors import CORSMiddleware
-# from src.routes import contacts, auth
-from src.routes import images
-from src.conf.config import settings
+from fastapi import FastAPI
+
+from src.routes import auth, users
 
 app = FastAPI()
 
-app.include_router(images.router, prefix='/api')
+app.include_router(auth.router, prefix='/api')
+app.include_router(users.router, prefix='/api')
+    
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello World"}
+    """
+    The read_root function is a function that returns the string &quot;Hello World&quot;
+    in JSON format. This is an example of how to use FastAPI to create a ReST API.
     
-if __name__ == '__main__':
-    uvicorn.run(app, host='localhost', port=8000, reload=True)
+    :return: A dictionary with a key &quot;message&quot; and
+    :doc-author: Trelent
+    """
+    return {"message": "Hello World"}
+
+if __name__ == "__main__":
+    uvicorn.run('main:app', host="localhost", port=8000, reload=True)

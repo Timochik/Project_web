@@ -1,70 +1,62 @@
 
 
-from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey, func
+from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey, func, Boolean
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
-from db import Base
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 
+# class User(Base):
+#     __tablename__ = "users"
+#     id = Column(Integer, primary_key=True, index=True)
+#     email = Column(String, unique=True)
+#     username = Column(String, unique=True)
+#     name = Column(String)
+#     hashed_password = Column(String, nullable=False)
+#     created_dt = Column(DateTime, default=datetime.utcnow())
+
+#     # profile
+#     dob = Column(Date)
+#     bio = Column(String)
 
 class User(Base):
     __tablename__ = "users"
-
-    # basic details
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True)
-    username = Column(String, unique=True)
-    name = Column(String)
-    hashed_password = Column(String, nullable=False)
-    created_dt = Column(DateTime, default=datetime.utcnow())
-
-    # profile
-    dob = Column(Date)
-    bio = Column(String)
-
-post_hashtags = Table(
-    "post_hashtags",
-    Base.metadata,
-    Column("post_id", Integer, ForeignKey("posts.id")),
-    Column("hashtag_id", Integer, ForeignKey("hashtags.id")),
-)
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50))
+    email = Column(String(250), nullable=False, unique=True)
+    password = Column(String(255), nullable=False)
+    created_at = Column('crated_at', DateTime, default=func.now())
+    avatar = Column(String(255), nullable=True)
+    refresh_token = Column(String(255), nullable=True)
+    confirmed = Column(Boolean, default=False)
 
 
-class Post(Base):
-    __tablename__ = "posts"
-
-    id = Column(Integer, primary_key=True, index=True)
-    content = Column(String)
-    image = Column(String)  # url to the image
-
-    author_id = Column(Integer, ForeignKey("users.id"))
-    author = relationship("auth.models.User", back_populates="posts")
-
-    tags = relationship("Tag", secondary=post_hashtags, back_populates="posts")
 
 
-class Tag(Base):
-    __tablename__ = "tags"
-    id = Column(Integer, primary_key=True, index = True)
-    name = Column(String, unique=True)
+# class Tag(Base):
+#     __tablename__ = "tags"
+#     id = Column(Integer, primary_key=True, index = True)
+#     name = Column(String, unique=True)
 
-    posts = relationship("Post", secondary=post_hashtags, back_populates="tags")
+#     posts = relationship("Post", secondary=post_hashtags, back_populates="tags")
 
-    def __repr__(self):
-        return self.name
+#     def __repr__(self):
+#         return self.name
     
 
-class Comment(Base):
-    __tablename__ = "comments"
-    id = Column(Integer, primary_key=True, index = True)
-    text = Column(String)
-    created_at = Column(DateTime, default=func.now())
-    updated_at = Column(DateTime, default=func.now())
+# class Comment(Base):
+#     __tablename__ = "comments"
+#     id = Column(Integer, primary_key=True, index = True)
+#     text = Column(String)
+#     created_at = Column(DateTime, default=func.now())
+#     updated_at = Column(DateTime, default=func.now())
 
-    post_id = Column(Integer, ForeignKey("posts.id"))
-    post = relationship("auth.models.Post", back_populates="comments")
+#     post_id = Column(Integer, ForeignKey("posts.id"))
+#     post = relationship("auth.models.Post", back_populates="comments")
 
-    author_id = Column(Integer, ForeignKey("users.id"))
-    author = relationship("auth.models.User", back_populates="comments")
+#     author_id = Column(Integer, ForeignKey("users.id"))
+#     author = relationship("auth.models.User", back_populates="comments")
     
