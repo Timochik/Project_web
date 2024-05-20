@@ -29,13 +29,8 @@ async def get_image(db: Session = Depends(get_db), current_user: User = Depends(
 
 
 @router.delete("/delete_image")
-async def delete_image(image_id: str ,db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user)):
-    image = db.query(Post).filter(Post.id == image_id).first()
-    if image.author_id != current_user.id:        
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Permission denied")
-    db.delete(image)
-    db.commit()
-    return {'msg': 'Post deleted'}
+async def delete_image(image_id: str , db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user)):
+    return await repository_images.del_images(image_id, db, current_user)
 
 
 @router.put("/edit_description_image")
