@@ -89,3 +89,16 @@ async def update_avatar(email, url: str, db: Session) -> User:
     user.avatar = url
     db.commit()
     return user
+
+
+async def get_user_by_username(username: str, db: Session) -> User:
+    """
+    The get_user_by_username function takes in a username and a database session,
+    and returns the user with that username. If no such user exists, it raises a
+    HTTPException.
+
+    :param username: str: The username of the user we want to get
+    :param db: Session: The database session
+    :return: The user object if found, None otherwise
+    """
+    return db.query(User).filter(User.username == username).first()
