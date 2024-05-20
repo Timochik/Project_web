@@ -25,8 +25,38 @@ class User(Base):
     refresh_token = Column(String(255), nullable=True)
     confirmed = Column(Boolean, default=False)
     role = Column(SQLAEnum(UserRole), default=UserRole.user)
+    posts = relationship("Post", backref="user")
 
 
+post_hashtags = Table(
+    "post_hashtags",
+    Base.metadata,
+    Column("post_id", Integer, ForeignKey("posts.id")),
+    Column("hashtag_id", Integer, ForeignKey("hashtags.id")),
+)
+
+
+class Post(Base):
+    __tablename__ = "posts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    description = Column(String)
+    image_url = Column(String)  # url to the image
+
+    author_id = Column('author_id', Integer, ForeignKey('users.id', ondelete='CASCADE'), default=None)
+    author = relationship("User", back_populates="posts")
+
+    hashtags = relationship("Hashtag", secondary=post_hashtags, back_populates="posts")
+    qr_code_url = Column(String)
+    created_dt = Column(DateTime, default=func.now())
+
+class Hashtag(Base):
+    __tablename__ = "hashtags"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+
+    posts = relationship("Post", secondary=post_hashtags, back_populates="hashtags")
 
 
 # class Tag(Base):

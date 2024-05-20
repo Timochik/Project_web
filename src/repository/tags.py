@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from src.database.models import Tag
+from src.database.models import Hashtag
 
 
 async def get_or_create_tag(db: Session, name: str):
@@ -14,7 +14,10 @@ async def get_or_create_tag(db: Session, name: str):
     Returns:
         Tag: The retrieved or created tag.
     """
-    tag = db.query(Tag).filter(Tag.name == name).first()
+    tag = db.query(Hashtag).filter(Hashtag.name == name).first()
     if not tag:
-        tag = Tag(name=name)
+        tag = Hashtag(name=name)
+        db.add(tag)
+        db.commit()
+        db.refresh(tag)
     return tag
