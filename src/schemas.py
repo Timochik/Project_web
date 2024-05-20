@@ -52,3 +52,22 @@ class UserOut(BaseModel):
 class RoleChangeRequest(BaseModel):
     user_id: int
     new_role: UserRole
+
+
+class PostCommentReques(BaseModel):
+    image_id: int
+    text: str
+
+
+class GetCommentResponce(BaseModel):
+    id: int
+    text: str
+    created_at: datetime
+    updated_at: datetime | None
+    image_id: int
+    user_id: int
+
+
+class PutCommentReques(BaseModel):
+    comment_id: int
+    new_text: str
