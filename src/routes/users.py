@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
 from sqlalchemy.orm import Session
 import cloudinary
 import cloudinary.uploader
@@ -54,4 +54,18 @@ async def update_avatar_user(file: UploadFile = File(), current_user: User = Dep
     src_url = cloudinary.CloudinaryImage(f'contacts/{current_user.username}')\
                         .build_url(width=250, height=250, crop='fill', version=r.get('version'))
     user = await repository_users.update_avatar(current_user.email, src_url, db)
+    return user
+
+
+@router.get("/username", response_model=UserDb)
+async def get_user_by_username(username: str, db: Session = Depends(get_db)):
+    """
+    Get user profile by unique username.
+    :param username: str: The unique username of the user
+    :param db: Session: The database session
+    :return: UserDb: The user profile information
+    """
+    user = await repository_users.get_user_by_username(username, db)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
     return user
