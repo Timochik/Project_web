@@ -40,18 +40,25 @@ class UserRole(str, Enum):
     user = "user"
     moderator = "moderator"
 
+
 class UserOut(BaseModel):
     id: int
     username: str
     role: UserRole
 
     class Config:
-        # orm_mode = True
         from_attribute = True
+
 
 class RoleChangeRequest(BaseModel):
     user_id: int
     new_role: UserRole
+
+
+class UserUpdate(BaseModel):
+    username: str
+    email: str
+    avatar: str
 
 
 class PostCommentReques(BaseModel):

@@ -8,7 +8,7 @@ from src.database.models import User
 from src.repository import users as repository_users
 from src.services.auth import auth_service
 from src.conf.config import settings
-from src.schemas import UserDb
+from src.schemas import UserDb, UserUpdate
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -57,7 +57,7 @@ async def update_avatar_user(file: UploadFile = File(), current_user: User = Dep
     return user
 
 
-@router.get("/username", response_model=UserDb)
+@router.get("/{username}", response_model=UserDb)
 async def get_user_by_username(username: str, db: Session = Depends(get_db)):
     """
     Get user profile by unique username.
@@ -69,3 +69,21 @@ async def get_user_by_username(username: str, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
+
+
+@router.put("/me", response_model=UserDb)
+async def update_my_profile(user_update: UserUpdate, db: Session = Depends(get_db),
+                            current_user: User = Depends(auth_service.get_current_user)):
+    """
+    The update_my_profile function allows the current user to update their own profile information.
+
+    :param user_update: UserUpdate: The new user data
+    :param db: Session: The database session
+    :param current_user: User: The current logged in user
+    :return: The updated user object
+    :doc-author: Trelent
+    """
+    updated_user = await repository_users.update_user(current_user.id, user_update, db)
+    if not updated_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return updated_user

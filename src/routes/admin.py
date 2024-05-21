@@ -29,3 +29,19 @@ async def change_user_role(
     db.commit()
     db.refresh(user_to_update)
     return user_to_update
+
+
+@router.put("/ban/{user_id}", response_model=UserOut)
+async def ban_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)
+):
+    user_to_ban = db.query(User).filter(User.id == user_id).first()
+    if not user_to_ban:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+    user_to_ban.is_active = False
+    db.commit()
+    db.refresh(user_to_ban)
+    return user_to_ban
