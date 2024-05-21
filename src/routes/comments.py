@@ -183,3 +183,39 @@ async def change_comment(
     comment.updated_at = datetime.now()
     db.commit()
     return comment
+
+
+@router.delete(
+    "/{comment_id}",
+    response_model=GetCommentResponce
+)
+async def delete_comment(
+    comment_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)
+):
+    """
+    The delete_comment function deletes a comment from the database.
+    
+    :param comment_id: int: Specify the id of the comment to be deleted
+    :param db: Session: Get a database session
+    :param current_user: User: Get the current user from the database
+    :return: The deleted comment
+    :doc-author: Trelent
+    """
+    if current_user.role not in (UserRole.admin, UserRole.moderator):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access denied"
+        )
+    comment = db.query(Comments).filter(
+        Comments.id == comment_id
+    ).first()
+    if comment is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Comment not found"
+        )
+    db.delete(comment)
+    db.commit()
+    return comment
