@@ -36,7 +36,7 @@ async def create_images_post(description: str, hashtags: List[str], user: User, 
     result = cloudinary.uploader.upload(file.file)
     url = result['secure_url']
     qr_url = await get_qr_code_by_url(url)    
-    images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags) #  hashtags=tags,
+    images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
     db.add(images)
     db.commit()
     db.refresh(images)
