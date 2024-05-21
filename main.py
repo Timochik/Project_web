@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from src.routes import auth, users, admin, images
+from src.routes import auth, users, admin, images, comments
 
 app = FastAPI()
 templates = Jinja2Templates(directory="src/templates")
@@ -13,6 +13,7 @@ app.include_router(auth.router, prefix='/api')
 app.include_router(users.router, prefix='/api')
 app.include_router(admin.router, prefix='/api')
 app.include_router(images.router, prefix='/api')
+app.include_router(comments.router, prefix='/api')
 
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
