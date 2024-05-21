@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
 from src.database.models import User
-from src.schemas import UserModel
+from src.schemas import UserModel, UserUpdate
 
 
 async def get_user_by_email(email: str, db: Session) -> User:
@@ -102,3 +102,24 @@ async def get_user_by_username(username: str, db: Session) -> User:
     :return: The user object if found, None otherwise
     """
     return db.query(User).filter(User.username == username).first()
+
+
+async def update_user(user_id: int, user_update: UserUpdate, db: Session) -> User:
+    """
+    The update_user function updates a user's information in the database.
+
+    :param user_id: int: The ID of the user to update
+    :param user_update: UserUpdate: The new user data
+    :param db: Session: The database session
+    :return: The updated user object, or None if the user was not found
+    :doc-author: Trelent
+    """
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        return None
+    user.username = user_update.username
+    user.email = user_update.email
+    user.avatar = user_update.avatar
+    db.commit()
+    db.refresh(user)
+    return user

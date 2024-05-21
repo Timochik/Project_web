@@ -26,6 +26,7 @@ class User(Base):
     confirmed = Column(Boolean, default=False)
     role = Column(SQLAEnum(UserRole), default=UserRole.user)
     posts = relationship("Post", backref="user")
+    is_active = Column(Boolean, default=True)
 
 
 post_hashtags = Table(
@@ -49,6 +50,7 @@ class Post(Base):
     hashtags = relationship("Hashtag", secondary=post_hashtags, back_populates="posts")
     qr_code_url = Column(String)
     created_dt = Column(DateTime, default=func.now())
+
 
 class Hashtag(Base):
     __tablename__ = "hashtags"
