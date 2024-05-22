@@ -42,7 +42,6 @@ async def update_avatar_user(file: UploadFile = File(), current_user: User = Dep
     :return: The updated user object
     :doc-author: Trelent
     """
-    print(file)
     cloudinary.config(
         cloud_name=settings.cloudinary_name,
         api_key=settings.cloudinary_api_key,

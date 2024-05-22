@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
 
 from src.database.db import get_db
+from src.database.models import User, UserRole
 from src.repository import users as repository_users
 from src.conf.config import settings
 
@@ -185,3 +186,8 @@ class Auth:
 
 
 auth_service = Auth()
+
+
+async def is_admin(current_user: User =  Depends(auth_service.get_current_user)):
+        if current_user.role != UserRole.admin:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
