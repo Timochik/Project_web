@@ -78,3 +78,18 @@ class GetCommentResponce(BaseModel):
 class PutCommentReques(BaseModel):
     comment_id: int
     new_text: str
+
+
+class RatingCreate(BaseModel):
+    image_id: int
+    rating: int = Field(gt=0, le=5)
+
+
+class RatingResponse(BaseModel):
+    id: int
+    rating: int
+    user_id: int
+    image_id: int
+    
+    class Config:
+        from_attributes = True
