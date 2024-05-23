@@ -89,38 +89,34 @@ async def put_image(image_id: int , new_description: str,
     return await repository_images.put_image(image_id, new_description, current_user, db)
     
 @router.get("/images/crop")
-async def crop_image_view(image_url: str, width: int, height: int, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
+async def crop_image_view(image_id: int, width: int, height: int, description: str, db: Session = Depends(get_db), user: User = Depends(auth_service.get_current_user)):
    return await crop_image(
-    image_url=image_url,
+    image_id=image_id,
     width=width,
     height=height,
     description=description,
-    hashtags=hashtags,
-    current_user=current_user,
-    db=db,
-    file=file
+    user=user,
+    db=db
 )
 
 @router.get("/images/effect")
-async def apply_effect_view( image_url: str, effect: str, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
+async def apply_effect_view( image_id: int, effect: str, description: str, hashtags: List[str], db: Session = Depends(get_db), user: User = Depends(auth_service.get_current_user)):
     return await apply_effect(
-    image_url=image_url,
+    image_id=image_id,
     effect = effect,
     description=description,
     hashtags=hashtags,
-    current_user=current_user,
-    db=db,
-    file=file
+    user=user,
+    db=db
 )
 
 @router.get("/images/roundcorners")
-async def round_corners(image_url: str, radius: int, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
+async def round_corners(image_id: int, radius: int, description: str, hashtags: List[str], db: Session = Depends(get_db), user: User = Depends(auth_service.get_current_user)):
     return await round_corners(
-    image_url=image_url,
+    image_id=image_id,
     radius = radius,
     description=description,
     hashtags=hashtags,
-    current_user=current_user,
-    db=db,
-    file=file
+    user=user,
+    db=db
 )

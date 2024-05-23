@@ -1,40 +1,28 @@
 import os
 from cloudinary.uploader import upload
-import cloudinary
+from cloudinary import CloudinaryImage
 from typing import List
 from fastapi import File, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 from src.repository.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
-
+from src.repository.images import get_image
 from src.database.models import Post, User
-from dotenv import load_dotenv
-load_dotenv()
 
 from src.repository import images as repository_images
 
-async def crop_image(image_url, width, height, description: str, hashtags: List[str], user: User, db: Session, file: UploadFile)-> Post:
+async def crop_image(image_id, width, height, description: str, user: User, db: Session)-> Post:
 
-  # Extract public ID from the image URL (assuming the format)
-  public_id = image_url.split("/")[-1].split(".")[0]
+  image = get_image(image_id, user, db)
 
-  # Generate the transformation string for cropping
-  transformation = f"c_crop,w_{width},h_{height}"
-
-  # Construct the URL for the cropped image
-  cropped_url = f"{image_url.split('/upload')[0]}/upload/{transformation}/{public_id}"
+  cropped_url = CloudinaryImage(image).image(transformation=[{"width": width, "height": height, "crop": "fill"}])
   print(f"Secure URL: {cropped_url}")
 
-  dbtags =[]
-  for i in hashtags:
-      tags_list = i.split(',')
-  for tag in tags_list:
-      dbtag = await get_or_create_tag(db, tag)
-      dbtags.append(dbtag)
+  tags = [hashtag.name for hashtag in image.hashtags]
         
   url = cropped_url
   qr_url = await get_qr_code_by_url(url)    
-  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
+  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=tags)
   db.add(images)
   db.commit()
   db.refresh(images)
@@ -42,27 +30,19 @@ async def crop_image(image_url, width, height, description: str, hashtags: List[
 
 
 
-async def apply_effect(image_url, effect, description: str, hashtags: List[str], user: User, db: Session, file: UploadFile)-> Post:
+async def apply_effect(image_id, effect, description: str, user: User, db: Session)-> Post:
+  
+  image = get_image(image_id, user, db)
 
   # Extract public ID from the image URL (assuming the format)
-  public_id = image_url.split("/")[-1].split(".")[0]
+  effected_url = CloudinaryImage(image).image(transformation=[{"effect": effect}])
+  print(f"Secure URL: {effected_url}")
 
-  # Build the transformation string for the effect
-  transformation = f"e_{effect}"
-
-  # Construct the URL for the image with effect
-  effect_url = f"{image_url.split('/upload')[0]}/upload/{transformation}/{public_id}"
-
-  dbtags =[]
-  for i in hashtags:
-      tags_list = i.split(',')
-  for tag in tags_list:
-      dbtag = await get_or_create_tag(db, tag)
-      dbtags.append(dbtag)
+  tags = [hashtag.name for hashtag in image.hashtags]
         
-  url = effect_url
+  url = effected_url
   qr_url = await get_qr_code_by_url(url)    
-  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
+  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=tags)
   db.add(images)
   db.commit()
   db.refresh(images)
@@ -71,29 +51,22 @@ async def apply_effect(image_url, effect, description: str, hashtags: List[str],
 
 
 
-async def round_corners(image_url, radius, description: str, hashtags: List[str], user: User, db: Session, file: UploadFile)-> Post:
+async def round_corners(image_id, radius, description: str, user: User, db: Session)-> Post:
+  
+  image = get_image(image_id, user, db)
 
-  # Extract public ID from the image URL (assuming the format)
-  public_id = image_url.split("/")[-1].split(".")[0]
+  rounded_url = CloudinaryImage(image).image(transformation=[{"radius": radius}])
+  print(f"Secure URL: {rounded_url}")
 
-  # Build the transformation string for rounded corners
-  transformation = f"r_{radius}"
-
-  # Construct the URL for the image with rounded corners
-  rounded_url = f"{image_url.split('/upload')[0]}/upload/{transformation}/{public_id}"
-
-  dbtags =[]
-  for i in hashtags:
-      tags_list = i.split(',')
-  for tag in tags_list:
-      dbtag = await get_or_create_tag(db, tag)
-      dbtags.append(dbtag)
+  tags = [hashtag.name for hashtag in image.hashtags]
         
   url = rounded_url
   qr_url = await get_qr_code_by_url(url)    
-  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
+  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=tags)
   db.add(images)
   db.commit()
   db.refresh(images)
   return images
+
+
   
