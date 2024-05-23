@@ -5,10 +5,18 @@ from sqlalchemy.orm import Session
 from src.database.models import Post, User
 from src.repository.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
+from src.conf.config import settings
 from sqlalchemy import and_
 
 import cloudinary
 import cloudinary.uploader
+
+cloudinary.config(
+        cloud_name=settings.cloudinary_name,
+        api_key=settings.cloudinary_api_key,
+        api_secret=settings.cloudinary_api_secret,
+        secure=True
+    )
 
 async def create_images_post(description: str, hashtags: List[str], user: User, db: Session, file: UploadFile)-> Post: 
     """
