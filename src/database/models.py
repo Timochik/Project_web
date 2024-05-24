@@ -30,6 +30,7 @@ class User(Base):
     posts = relationship("Post", backref="user")
     is_active = Column(Boolean, default=True)
     ratings = relationship("Rating", back_populates="user")
+    comments = relationship("Comments", back_populates="user")
 
 
 post_hashtags = Table(
@@ -54,6 +55,7 @@ class Post(Base):
     qr_code_url = Column(String)
     created_dt = Column(DateTime, default=func.now())
     ratings = relationship("Rating", back_populates="image")
+    comments = relationship("Comments", back_populates="image")
 
 
 class Hashtag(Base):
@@ -73,6 +75,8 @@ class Comments(Base):
     updated_at = Column(DateTime, default=None, nullable=True)
     image_id = Column(ForeignKey("posts.id", ondelete='CASCADE'), nullable=False)
     user_id = Column(ForeignKey("users.id", ondelete='CASCADE'), nullable=False)
+    user = relationship("User", back_populates="comments")
+    image = relationship("Post", back_populates="comments")
 
 
 class Rating(Base):
