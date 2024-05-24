@@ -1,4 +1,5 @@
 from typing import List
+import uuid
 from fastapi import File, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
@@ -40,8 +41,9 @@ async def create_images_post(description: str, hashtags: List[str], user: User, 
     for tag in tags_list:
         dbtag = await get_or_create_tag(db, tag)
         dbtags.append(dbtag)
-        
-    result = cloudinary.uploader.upload(file.file)
+
+    public_id = f'{settings.cloudinary_folder_name}/{uuid.uuid4()}'
+    result = cloudinary.uploader.upload(file.file, public_id=public_id)
     url = result['secure_url']
     qr_url = await get_qr_code_by_url(url)    
     images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
