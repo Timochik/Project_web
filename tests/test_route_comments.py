@@ -150,3 +150,77 @@ def test_get_comment_by_image_not_found(client):
     data = response.json()
     assert data["detail"] == "Image not found"
 
+
+def test_get_comments_by_user(client, session, user):
+    current_user = session.query(User).filter(
+        User.email == user["email"]
+    ).first()
+    comments = session.query(Comments).filter(
+        Comments.user_id == current_user.id
+    ).all()
+    response = client.get(f"/api/comments/by-user/{current_user.id}")
+    assert response.status_code == 200, response.text
+    data = response.json()
+    assert len(data) == len(comments)
+
+
+def test_get_comments_by_user_not_found(client):
+    user_id = 3
+    response = client.get(f"/api/comments/by-user/{user_id}")
+    assert response.status_code == 404, response.text
+    data = response.json()
+    assert data["detail"] == "User not found"
+
+
+def test_delete_comment_access_denied(client, get_token):
+    comment_id = 1
+    token = get_token
+    headers = {"Authorization": f"Bearer {token}"}
+    response = client.delete(
+        f"/api/comments/{comment_id}",
+        headers=headers
+    )
+    assert response.status_code == 403, response.text
+    data = response.json()
+    assert data["detail"] == "Access denied"
+
+
+def test_delete_comment(client, get_token, session, user):
+    comment_id = 1
+    current_comment: Comments = session.query(Comments).filter(
+        Comments.id == comment_id
+    ).first()
+
+    current_user = session.query(User).filter(
+        User.email == user["email"]
+    ).first()
+    current_user.role = UserRole.moderator
+    session.commit()
+
+    token = get_token
+    headers = {"Authorization": f"Bearer {token}"}
+    response = client.delete(
+        f"/api/comments/{comment_id}",
+        headers=headers
+    )
+    assert response.status_code == 200, response.text
+    data = response.json()
+    assert data["id"] == current_comment.id
+    assert data["text"] == current_comment.text
+    assert data["created_at"] == current_comment.created_at.isoformat()
+    assert data["updated_at"] == current_comment.updated_at.isoformat()
+    assert data["image_id"] == current_comment.image_id
+    assert data["user_id"] == current_comment.user_id
+
+
+def test_delete_comment_not_found(client, get_token, session, user):
+    comment_id = 1
+    token = get_token
+    headers = {"Authorization": f"Bearer {token}"}
+    response = client.delete(
+        f"/api/comments/{comment_id}",
+        headers=headers
+    )
+    assert response.status_code == 404, response.text
+    data = response.json()
+    assert data["detail"] == "Comment not found"
