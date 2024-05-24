@@ -27,7 +27,7 @@ class User(Base):
     refresh_token = Column(String(255), nullable=True)
     confirmed = Column(Boolean, default=False)
     role = Column(SQLAEnum(UserRole), default=UserRole.user)
-    posts = relationship("Post", backref="user")
+    posts = relationship("Post", back_populates="author")
     is_active = Column(Boolean, default=True)
     ratings = relationship("Rating", back_populates="user")
     comments = relationship("Comments", back_populates="user")
@@ -36,7 +36,7 @@ class User(Base):
 post_hashtags = Table(
     "post_hashtags",
     Base.metadata,
-    Column("post_id", Integer, ForeignKey("posts.id")),
+    Column("post_id", Integer, ForeignKey("posts.id", ondelete='CASCADE')),
     Column("hashtag_id", Integer, ForeignKey("hashtags.id")),
 )
 
