@@ -3,11 +3,12 @@ from fastapi.responses import FileResponse, HTMLResponse
 from sqlalchemy.orm import Session
 from typing import List
 
+from src.schemas import CropImageRequest, ImageResponce
 from src.database.models import User
 from src.database.db import get_db
 from src.repository import images as repository_images
 from src.services.auth import auth_service
-from src.routes.utils import apply_effect, round_corners, crop_image
+from src.utils.image_utils import apply_effect, round_corners, crop_image
 
 router = APIRouter(prefix='/images', tags=["images"])
 
@@ -87,19 +88,35 @@ async def put_image(image_id: int , new_description: str,
     :doc-author: Trelent
     """
     return await repository_images.put_image(image_id, new_description, current_user, db)
-    
-@router.get("/images/crop")
-async def crop_image_view(image_url: str, width: int, height: int, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
-   return await crop_image(
-    image_url=image_url,
-    width=width,
-    height=height,
-    description=description,
-    hashtags=hashtags,
-    current_user=current_user,
-    db=db,
-    file=file
+
+
+@router.post(
+    "/transformation/crop",
+    response_model=ImageResponce
 )
+async def crop_image_view(
+    body: CropImageRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)
+):
+    """
+    The crop_image_view function that allows users to crop an image.
+    
+    :param body: CropImageRequest: Parse the request body
+    :param db: Session: Access the database
+    :param current_user: User: Get the user who is currently logged in
+    :return: A cropped image
+    :doc-author: Trelent
+    """
+    return await crop_image(
+        image_id=body.iamge_id,
+        width=body.width,
+        height=body.height,
+        description=body.description,
+        db=db,
+        current_user=current_user
+    )
+
 
 @router.get("/images/effect")
 async def apply_effect_view( image_url: str, effect: str, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):

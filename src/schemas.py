@@ -93,3 +93,19 @@ class RatingResponse(BaseModel):
     
     class Config:
         from_attributes = True
+
+
+class CropImageRequest(BaseModel):
+    iamge_id: int
+    width: int
+    height: int
+    description: str
+
+
+class ImageResponce(BaseModel):
+    id: int
+    description: str
+    image_url: str
+    author_id: int
+    qr_code_url: str    
+    created_dt: datetime
