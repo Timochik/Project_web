@@ -6,7 +6,7 @@ from typing import List
 from src.database.models import User
 from src.database.db import get_db
 from src.repository import images as repository_images
-from src.services.auth import auth_service
+from src.services.auth import auth_service, check_is_admin_or_moderator
 from src.routes.utils import apply_effect, round_corners, crop_image
 
 router = APIRouter(prefix='/images', tags=["images"])
@@ -29,7 +29,11 @@ async def upload_file(description: str, hashtags: List[str], db: Session = Depen
     return await repository_images.create_images_post(description, hashtags, current_user, db,  file)
 
 @router.get("/get_image")
-async def get_image(image_id : int, db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user)):
+async def get_image(
+    image_id : int,
+    user_id: int = None,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)):
     """
     The get_image function returns a single image from the database.
         The function takes an integer as its only argument, which is the id of the image to be returned.
@@ -41,10 +45,15 @@ async def get_image(image_id : int, db: Session = Depends(get_db), current_user:
     :return: A json object, which contains the info
     :doc-author: Trelent
     """
-    return await repository_images.get_image(image_id, current_user, db)
+    if not user_id:
+        return await repository_images.get_image(image_id, current_user.id, db)
+    return await repository_images.get_image(image_id, user_id, db)
 
 @router.get("/get_images")
-async def get_images(db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user)):
+async def get_images(
+    user_id: int = None,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)):
     """
     The get_images function returns a list of images that the current user has uploaded.
         
@@ -54,10 +63,15 @@ async def get_images(db: Session = Depends(get_db), current_user: User = Depends
     :return: A list of image objects
     :doc-author: Trelent
     """
-    return await repository_images.get_images(current_user, db)
+    if not user_id:
+        return await repository_images.get_images(user_id=current_user.id, db=db)
+    return await repository_images.get_images(user_id=user_id, db=db)
 
 @router.delete("/delete_image")
-async def delete_image(image_id: int , db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user)):
+async def delete_image(
+    image_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)):
     """
     The delete_image function deletes an image from the database.
         

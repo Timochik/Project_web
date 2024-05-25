@@ -7,6 +7,7 @@ from src.database.models import Post, User
 from src.utils.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
 from src.conf.config import settings
+from src.services.auth import check_is_admin_or_moderator
 from sqlalchemy import and_
 
 import cloudinary
@@ -53,7 +54,7 @@ async def create_images_post(description: str, hashtags: List[str], user: User, 
     return images
     
 
-async def get_images(current_user: User, db: Session):
+async def get_images(user_id: int, db: Session):
     """
     The get_images function returns all images that the current user has uploaded.
         
@@ -63,9 +64,9 @@ async def get_images(current_user: User, db: Session):
     :return: A list of post objects
     :doc-author: Trelent
     """
-    return db.query(Post).filter(Post.author_id == str(current_user.id)).all()
+    return db.query(Post).filter(Post.author_id == str(user_id)).all()
 
-async def get_image(image_id : int, current_user: User, db: Session):
+async def get_image(image_id : int, user_id: User, db: Session):
 
     """
     The get_image function returns the image with the given id.
@@ -77,7 +78,7 @@ async def get_image(image_id : int, current_user: User, db: Session):
     :return: A post object
     :doc-author: Trelent
     """
-    return db.query(Post).filter(and_(Post.author_id == str(current_user.id), Post.id == image_id)).first()
+    return db.query(Post).filter(and_(Post.author_id == str(user_id), Post.id == image_id)).first()
 
 
 async def del_image(image_id:int, db: Session, current_user: User ):
@@ -96,7 +97,8 @@ async def del_image(image_id:int, db: Session, current_user: User ):
     """
     try:
         image = db.query(Post).filter(Post.id == image_id).first()
-        if image.author_id != current_user.id:        
+        if (not await check_is_admin_or_moderator(current_user) and
+            image.author_id != current_user.id):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Permission denied")
     except:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Permission denied")
@@ -122,11 +124,10 @@ async def put_image(image_id:int, new_description:str, current_user: User, db: S
     :doc-author: Trelent
     """
     image = db.query(Post).filter(Post.id == image_id).first()
-    if image.author_id != current_user.id:        
+    if (not await check_is_admin_or_moderator(current_user) and
+            image.author_id != current_user.id):      
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Permission denied")
-    new_images = Post(id=image.id, description=new_description, author_id=current_user.id, image_url=image.image_url)
-    db.delete(image)
-    db.add(new_images)
+    image.description = new_description
     db.commit()
-    db.refresh(new_images)
-    return new_images
+    db.refresh(image)
+    return image

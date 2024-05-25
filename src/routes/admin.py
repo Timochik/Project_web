@@ -4,26 +4,23 @@ from pydantic import BaseModel
 
 from src.database.db import get_db
 from src.database.models import User, UserRole
-from src.services.auth import auth_service
+from src.services.auth import auth_service, is_admin, is_admin_or_moderator
 from src.schemas import UserOut, RoleChangeRequest
+from src.repository import images as repository_images
 
 
 router = APIRouter(prefix="/admin", tags=["admin"])
-
-# class RoleChangeRequest(BaseModel):
-#     user_id: int
-#     new_role: UserRole
 
 
 @router.put("/change-role", response_model=UserOut)
 async def change_user_role(
     request: RoleChangeRequest,
     db: Session = Depends(get_db),
-    current_user: User = Depends(auth_service.get_current_user)
+    current_user: User = Depends(is_admin)
 ):
-    if current_user.role != UserRole.admin:
+    if request.user_id == 1 or request.user_id == current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
-
+    
     user_to_update = db.query(User).filter(User.id == request.user_id).first()
     if not user_to_update:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
@@ -38,11 +35,11 @@ async def change_user_role(
 async def ban_user(
     user_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(auth_service.get_current_user)
+    current_user: User = Depends(is_admin)
 ):
-    if current_user.role != UserRole.admin:
+    if user_id == 1 or user_id == current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
-
+    
     user_to_ban = db.query(User).filter(User.id == user_id).first()
     if not user_to_ban:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
@@ -57,11 +54,8 @@ async def ban_user(
 async def unban_user(
         user_id: int,
         db: Session = Depends(get_db),
-        current_user: User = Depends(auth_service.get_current_user)
+        current_user: User = Depends(is_admin)
 ):
-    if current_user.role != UserRole.admin:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
-
     user_to_unban = db.query(User).filter(User.id == user_id).first()
     if not user_to_unban:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
