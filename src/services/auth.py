@@ -189,5 +189,11 @@ auth_service = Auth()
 
 
 async def is_admin(current_user: User =  Depends(auth_service.get_current_user)):
+        print(current_user.role)
         if current_user.role != UserRole.admin:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
+        
+async def is_admin_or_moderator(current_user: User =  Depends(auth_service.get_current_user)):
+    if (current_user.role != UserRole.admin or
+        current_user.role != UserRole.moderator):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions4")
