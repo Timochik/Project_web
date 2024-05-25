@@ -4,7 +4,7 @@ from fastapi import File, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
 from src.database.models import Post, User
-from src.repository.qr_code import get_qr_code_by_url
+from src.utils.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
 from src.conf.config import settings
 from sqlalchemy import and_
