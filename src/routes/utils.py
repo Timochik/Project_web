@@ -4,7 +4,7 @@ import cloudinary
 from typing import List
 from fastapi import File, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
-from src.repository.qr_code import get_qr_code_by_url
+from src.utils.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
 
 from src.database.models import Post, User
