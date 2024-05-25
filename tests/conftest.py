@@ -29,9 +29,16 @@ test_user = {
 }
 
 
+@pytest.fixture(scope="module")
+def user():
+    return test_user
+
+
 @pytest_asyncio.fixture
 async def get_token():
-    token = await auth_service.create_access_token(data={"sub": test_user["email"]})
+    token = await auth_service.create_access_token(
+        data={"sub": test_user["email"]}
+    )
     return token
 
 
@@ -44,7 +51,9 @@ def session():
 
     db = TestingSessionLocal()
 
-    hash_password = auth_service.get_password_hash(password=test_user["password"])
+    hash_password = auth_service.get_password_hash(
+        password=test_user["password"]
+    )
     current_user = User(
         username=test_user["username"],
         email=test_user["email"],

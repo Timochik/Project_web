@@ -1,14 +1,23 @@
 from typing import List
+import uuid
 from fastapi import File, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
 from src.database.models import Post, User
 from src.repository.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
+from src.conf.config import settings
 from sqlalchemy import and_
 
 import cloudinary
 import cloudinary.uploader
+
+cloudinary.config(
+        cloud_name=settings.cloudinary_name,
+        api_key=settings.cloudinary_api_key,
+        api_secret=settings.cloudinary_api_secret,
+        secure=True
+    )
 
 async def create_images_post(description: str, hashtags: List[str], user: User, db: Session, file: UploadFile)-> Post: 
     """
@@ -32,8 +41,9 @@ async def create_images_post(description: str, hashtags: List[str], user: User, 
     for tag in tags_list:
         dbtag = await get_or_create_tag(db, tag)
         dbtags.append(dbtag)
-        
-    result = cloudinary.uploader.upload(file.file)
+
+    public_id = f'{settings.cloudinary_folder_name}/{uuid.uuid4()}'
+    result = cloudinary.uploader.upload(file.file, public_id=public_id)
     url = result['secure_url']
     qr_url = await get_qr_code_by_url(url)    
     images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
