@@ -6,6 +6,7 @@ from src.database.db import get_db
 from src.database.models import User, UserRole
 from src.services.auth import auth_service, is_admin, is_admin_or_moderator
 from src.schemas import UserOut, RoleChangeRequest
+from src.repository import images as repository_images
 
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -17,7 +18,7 @@ async def change_user_role(
     db: Session = Depends(get_db),
     current_user: User = Depends(is_admin)
 ):
-    if request.user_id == 1:
+    if request.user_id == 1 or request.user_id == current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
     
     user_to_update = db.query(User).filter(User.id == request.user_id).first()
@@ -34,11 +35,11 @@ async def change_user_role(
 async def ban_user(
     user_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(is_admin_or_moderator)
+    current_user: User = Depends(is_admin)
 ):
     if user_id == 1 or user_id == current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions1")
-
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
+    
     user_to_ban = db.query(User).filter(User.id == user_id).first()
     if not user_to_ban:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
@@ -53,7 +54,7 @@ async def ban_user(
 async def unban_user(
         user_id: int,
         db: Session = Depends(get_db),
-        current_user: User = Depends(is_admin_or_moderator)
+        current_user: User = Depends(is_admin)
 ):
     user_to_unban = db.query(User).filter(User.id == user_id).first()
     if not user_to_unban:
