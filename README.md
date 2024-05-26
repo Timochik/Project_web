@@ -34,37 +34,89 @@
     cd src
     ```
 
-4. Run the container:
+4. To work with the project, you will need an .env file with environment variables. Create it using the example file .env.example.py:
+    ```
+    POSTGRES_DB=postgres
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=secret_password
+    POSTGRES_PORT=5432
+
+    SQLALCHEMY_DATABASE_URL=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}
+
+    SECRET_KEY=secret_key
+    ALGORITHM=HS256
+
+    MAIL_USERNAME=example@mail.com
+    MAIL_PASSWORD=mail_password
+    MAIL_FROM=example@mail.com
+    MAIL_PORT=465
+    MAIL_SERVER=smtp_server
+
+    CLOUDINARY_NAME=name
+    CLOUDINARY_API_KEY=api_key
+    CLOUDINARY_API_SECRET=api_secret
+
+    # folder name where project images will be stored on Cloudinary repository
+    CLOUDINARY_FOLDER_NAME=project_web
+    ```
+
+5. Run the container:
     ```
     docker-compose up
     ```
 
-5. Apply changes:
+6. Apply changes:
     ```
     alembic upgrade head
     ```
 
-6. Run the server:
+7. Run the server:
     ```
     cd ..
     python main.py
     ```
+    
+8. Run tests:  
+    ```
+    python -m pytest tests/filename -v
+    ```
+
+## Main Functionality
+
+The application has the following main functionality:
+
+* Authentication
+    * JWT tokens
+    * Administrator, moderator, and regular user roles
+    * FastApi decorators are used to check the token and user role.
+
+* Working with Photos 
+
+    * The main functionality of working with photos is performed using HTTP requests (POST, DELETE, PUT, GET).
+    * Unique tags for the entire application that can be added under a photo (up to 5 tags).
+    * Users can perform basic actions with photos allowed by the Cloudinary service.
+    * Links for viewing a photo as a URL and QR-code can be created and stored on the server.
+    * Administrators can perform all CRUD operations with user photos.
+
+* Commenting
+
+    * Under each photo, there is a block with comments.
+    * The creation and editing time of the comment is stored in the database.
+    * Users can edit their comments but cannot delete them. Administrators and moderators can delete comments.
+
 ## Usage 
 
-
-
-
+This project exposes 30+ endpoints through a REST API. To access these APIs, use any API client, such as Postman.
 
 ## Developers 
 
 <div align="">
-  <a href="https://github.com/olhalialina">olhalialina</a><br>
-  <a href="https://github.com/Nyambevos">Nyambevos</a><br>
-  <a href="https://github.com/andrii-trebukh">andrii-trebukh</a><br>
-  <a href="https://github.com/Y3vh3n11">Y3vh3n11</a><br>
-  <a href="https://github.com/Timochik">Timochik</a><br>
+  <p>Scrum Master, developer: <a href="https://github.com/olhalialina">Olha lialina</a></p>
+  <p>Team Lead, developer: <a href="https://github.com/Nyambevos">Ruslan Bilokoniok</a></p>
+  <p>Developer: <a href="https://github.com/andrii-trebukh">Andrii Trebukh</a></p>
+  <p>Developer: <a href="https://github.com/Y3vh3n11">Eugene Vlasenko</a></p>
+  <p>Developer: <a href="https://github.com/Timochik">Timothy</a></p>
 </div>
-
 
 ## License 
 
