@@ -1,46 +1,37 @@
-import os
-from cloudinary.uploader import upload
 import cloudinary
-from cloudinary import CloudinaryImage
-from typing import List
-from fastapi import File, HTTPException, UploadFile, status
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from src.utils.qr_code import get_qr_code_by_url
-from src.repository.tags import get_or_create_tag
-
 from src.database.models import Post, User
-from dotenv import load_dotenv
-load_dotenv()
-
-from src.repository import images as repository_images
-
 from src.conf.config import settings
 
 
-async def crop_image(
+async def transform_image(
     image_id: int,
-    width: int,
-    height: int,
+    transform_params: dict,
     description: str,
     db: Session,
     current_user: User,
-    service: cloudinary=cloudinary
-)-> Post:
-
+    service: cloudinary = cloudinary
+) -> Post:
     """
-    The crop_image function crops an image by the given width and height.
+    The transform_image function takes an image_id, transform_params, description and db as arguments.
+    It then queries the database for a Post with the given id. If no such post exists it raises a 404 error.
+    If the user is not authorized to access this post (i.e., if they are not its author) it raises a 403 error instead.
+    The function then configures cloudinary using settings from settings module and builds an url for transformed image using 
+    the public id of original image and transform params provided by user in request body (see docs/transformations). 
+    Then it gets qr code url for new
     
-    :param image_id: int: Id of the image to be cropped
-    :param width: int: Set the width of the image
-    :param height: int: Set the height of the image
+    :param image_id: int: Specify the image that is to be transformed
+    :param transform_params: dict: Pass in the transformation parameters
     :param description: str: Set the description of the new image
     :param db: Session: Access the database
-    :param current_user: User: Get the user id of the current logged in user
-    :param service: cloudinary: Mock the cloudinary library
-    :return: The newly created image, which is then returned to the client
+    :param current_user: User: Get the current user's id
+    :param service: cloudinary: Pass in the cloudinary library
+    :return: A new image with the transformation applied
     :doc-author: Trelent
     """
-    image:Post = db.query(Post).filter(
+    image: Post = db.query(Post).filter(
         Post.id == image_id
     ).first()
     if image is None:
@@ -63,11 +54,9 @@ async def crop_image(
 
     filename = image.image_url.split("/")[-1].split(".")[0]
     public_id = f'{settings.cloudinary_folder_name}/{filename}'
-    
+
     url = service.CloudinaryImage(public_id=public_id).build_url(
-        height=height,
-        width=width,
-        crop="crop"
+        **transform_params
     )
 
     qr_code_url = await get_qr_code_by_url(url=url, service=service)
@@ -84,60 +73,3 @@ async def crop_image(
     db.commit()
     db.refresh(new_image)
     return new_image
-
-
-async def apply_effect(image_url, effect, description: str, hashtags: List[str], user: User, db: Session, file: UploadFile)-> Post:
-
-  # Extract public ID from the image URL (assuming the format)
-  public_id = image_url.split("/")[-1].split(".")[0]
-
-  # Build the transformation string for the effect
-  transformation = f"e_{effect}"
-
-  # Construct the URL for the image with effect
-  effect_url = f"{image_url.split('/upload')[0]}/upload/{transformation}/{public_id}"
-
-  dbtags =[]
-  for i in hashtags:
-      tags_list = i.split(',')
-  for tag in tags_list:
-      dbtag = await get_or_create_tag(db, tag)
-      dbtags.append(dbtag)
-        
-  url = effect_url
-  qr_url = await get_qr_code_by_url(url)    
-  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
-  db.add(images)
-  db.commit()
-  db.refresh(images)
-  return images
-  
-
-
-
-async def round_corners(image_url, radius, description: str, hashtags: List[str], user: User, db: Session, file: UploadFile)-> Post:
-
-  # Extract public ID from the image URL (assuming the format)
-  public_id = image_url.split("/")[-1].split(".")[0]
-
-  # Build the transformation string for rounded corners
-  transformation = f"r_{radius}"
-
-  # Construct the URL for the image with rounded corners
-  rounded_url = f"{image_url.split('/upload')[0]}/upload/{transformation}/{public_id}"
-
-  dbtags =[]
-  for i in hashtags:
-      tags_list = i.split(',')
-  for tag in tags_list:
-      dbtag = await get_or_create_tag(db, tag)
-      dbtags.append(dbtag)
-        
-  url = rounded_url
-  qr_url = await get_qr_code_by_url(url)    
-  images = Post(description=description, author_id=user.id, image_url=url, qr_code_url=qr_url, hashtags=dbtags)
-  db.add(images)
-  db.commit()
-  db.refresh(images)
-  return images
-  
