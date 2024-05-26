@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 import cloudinary
-from src.repository.qr_code import get_qr_code_by_url, delete_qr_code_by_url
+from src.utils.qr_code import get_qr_code_by_url, delete_qr_code_by_url
 
 
 class TestUsers(unittest.IsolatedAsyncioTestCase):

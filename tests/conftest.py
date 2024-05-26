@@ -1,5 +1,6 @@
 import pytest
 import pytest_asyncio
+from unittest.mock import AsyncMock
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -90,3 +91,12 @@ def comment():
         "image_id": 1,
         "text": "Test text"
     }
+
+
+@pytest.fixture()
+def mock_get_qr_code_by_url(mocker):
+    async_mock = AsyncMock(return_value="qr_code_url_responce")
+    mocker.patch(
+        'src.utils.image_utils.get_qr_code_by_url',
+        side_effect=async_mock
+    )
