@@ -105,18 +105,18 @@ class ImageResponce(BaseModel):
 
 
 class CropImageRequest(BaseModel):
-    iamge_id: int
+    image_id: int
     width: int
     height: int
     description: str
 
 
 class RoundCornersImageRequest(BaseModel):
-    iamge_id: int
+    image_id: int
     radius: int
     description: str
 
 
 class EffectImageRequest(BaseModel):
-    iamge_id: int
+    image_id: int
     description: str

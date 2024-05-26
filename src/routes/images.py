@@ -133,7 +133,7 @@ async def crop_image_view(
         "crop": "crop"
     }
     return await transform_image(
-        image_id=body.iamge_id,
+        image_id=body.image_id,
         transform_params=transform_params,
         description=body.description,
         db=db,
@@ -163,7 +163,7 @@ async def round_corners(
     """
     transform_params = {"radius": body.radius}
     return await transform_image(
-        image_id=body.iamge_id,
+        image_id=body.image_id,
         transform_params=transform_params,
         description=body.description,
         db=db,
@@ -191,7 +191,7 @@ async def grayscale(
     """
     transform_params = {"effect": "grayscale"}
     return await transform_image(
-        image_id=body.iamge_id,
+        image_id=body.image_id,
         transform_params=transform_params,
         description=body.description,
         db=db,
@@ -221,7 +221,7 @@ async def sepia(
     """
     transform_params = {"effect": "sepia"}
     return await transform_image(
-        image_id=body.iamge_id,
+        image_id=body.image_id,
         transform_params=transform_params,
         description=body.description,
         db=db,
