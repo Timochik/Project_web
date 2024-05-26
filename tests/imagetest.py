@@ -14,7 +14,7 @@ from src.repository.images import (
     del_image,
     put_image,
 )
-from src.repository.qr_code import get_qr_code_by_url
+from src.utils.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
 
 class TestImages(unittest.IsolatedAsyncioTestCase):

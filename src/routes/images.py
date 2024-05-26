@@ -1,4 +1,4 @@
-from fastapi import Depends, File, UploadFile, APIRouter
+from fastapi import Depends, File, HTTPException, UploadFile, APIRouter, status
 from fastapi.responses import FileResponse, HTMLResponse
 from sqlalchemy.orm import Session
 from typing import List
@@ -32,7 +32,11 @@ async def upload_file(description: str, hashtags: List[str], db: Session = Depen
     :return: A tuple of the info
     :doc-author: Trelent
     """
-    return await repository_images.create_images_post(description, hashtags, current_user, db,  file)
+    for i in hashtags:
+        tags_list = i.split(',')
+    if len(tags_list) > 5:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Limit of 5 tags")
+    return await repository_images.create_images_post(description, tags_list, current_user, db,  file)
 
 @router.get("/get_image")
 async def get_image(
