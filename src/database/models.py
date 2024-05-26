@@ -83,7 +83,7 @@ class Rating(Base):
     __tablename__ = "ratings"
     id = Column(Integer, primary_key=True, index=True)
     rating = Column(Float, nullable=False)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete='CASCADE'), nullable=False)
     image_id = Column(Integer, ForeignKey("posts.id"), nullable=False)
 
     user = relationship("User", back_populates="ratings")
