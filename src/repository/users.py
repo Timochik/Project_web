@@ -2,8 +2,10 @@ from libgravatar import Gravatar
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
+from src.database.db import get_db
 from src.database.models import User
 from src.schemas import UserModel, UserUpdate
+from src.services.auth import auth_service
 
 
 async def get_user_by_email(email: str, db: Session) -> User:
@@ -123,3 +125,24 @@ async def update_user(user_id: int, user_update: UserUpdate, db: Session) -> Use
     db.commit()
     db.refresh(user)
     return user
+
+async def get_user_by_id(user_id: int, db: Session = next(get_db())) -> User:
+    
+    """
+    The get_user_by_id function takes in a user_id and a database session,
+    and returns the User object associated with that id. If no such user exists,
+    it raises an HTTPException.
+    
+    :param user_id: int: Specify the type of data that is expected to be passed into the function
+    :param db: Session: Pass the database session to the function
+    :return: A query object
+    :doc-author: Trelent
+    """
+    return db.query(User).filter(User.id == user_id).first()
+
+async def add_first_user_admin(username: str, email: str, password: str, db: Session = next(get_db())) -> None:
+    hash_password = auth_service.get_password_hash(password)
+    new_user = User(id=1, username=username, email=email, password=hash_password, confirmed=True, role="admin", avatar=None)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)

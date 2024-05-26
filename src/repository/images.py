@@ -36,10 +36,8 @@ async def create_images_post(description: str, hashtags: List[str], user: User, 
     :return: A post object
     :doc-author: Trelent
     """
-    dbtags =[]
-    for i in hashtags:
-        tags_list = i.split(',')
-    for tag in tags_list:
+    dbtags = []
+    for tag in hashtags:
         dbtag = await get_or_create_tag(db, tag)
         dbtags.append(dbtag)
 
