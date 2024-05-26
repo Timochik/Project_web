@@ -90,6 +90,33 @@ class RatingResponse(BaseModel):
     rating: int
     user_id: int
     image_id: int
-    
+
     class Config:
         from_attributes = True
+
+
+class ImageResponce(BaseModel):
+    id: int
+    description: str
+    image_url: str
+    author_id: int
+    qr_code_url: str
+    created_dt: datetime
+
+
+class CropImageRequest(BaseModel):
+    iamge_id: int
+    width: int
+    height: int
+    description: str
+
+
+class RoundCornersImageRequest(BaseModel):
+    iamge_id: int
+    radius: int
+    description: str
+
+
+class EffectImageRequest(BaseModel):
+    iamge_id: int
+    description: str

@@ -3,11 +3,17 @@ from fastapi.responses import FileResponse, HTMLResponse
 from sqlalchemy.orm import Session
 from typing import List
 
+from src.schemas import (
+    ImageResponce,
+    CropImageRequest,
+    RoundCornersImageRequest,
+    EffectImageRequest
+)
 from src.database.models import User
 from src.database.db import get_db
 from src.repository import images as repository_images
 from src.services.auth import auth_service, check_is_admin_or_moderator
-from src.routes.utils import apply_effect, round_corners, crop_image
+from src.utils.image_utils import transform_image
 
 router = APIRouter(prefix='/images', tags=["images"])
 
@@ -101,40 +107,123 @@ async def put_image(image_id: int , new_description: str,
     :doc-author: Trelent
     """
     return await repository_images.put_image(image_id, new_description, current_user, db)
+
+
+@router.post(
+    "/transformation/crop",
+    response_model=ImageResponce
+)
+async def crop_image_view(
+    body: CropImageRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)
+):
+    """
+    The crop_image_view function that allows users to crop an image.
     
-@router.get("/images/crop")
-async def crop_image_view(image_url: str, width: int, height: int, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
-   return await crop_image(
-    image_url=image_url,
-    width=width,
-    height=height,
-    description=description,
-    hashtags=hashtags,
-    current_user=current_user,
-    db=db,
-    file=file
-)
+    :param body: CropImageRequest: Parse the request body
+    :param db: Session: Access the database
+    :param current_user: User: Get the user who is currently logged in
+    :return: A cropped image
+    :doc-author: Trelent
+    """
+    transform_params = {
+        "height": body.height,
+        "width": body.width,
+        "crop": "crop"
+    }
+    return await transform_image(
+        image_id=body.iamge_id,
+        transform_params=transform_params,
+        description=body.description,
+        db=db,
+        current_user=current_user
+    )
 
-@router.get("/images/effect")
-async def apply_effect_view( image_url: str, effect: str, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
-    return await apply_effect(
-    image_url=image_url,
-    effect = effect,
-    description=description,
-    hashtags=hashtags,
-    current_user=current_user,
-    db=db,
-    file=file
-)
 
-@router.get("/images/roundcorners")
-async def round_corners(image_url: str, radius: int, description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
-    return await round_corners(
-    image_url=image_url,
-    radius = radius,
-    description=description,
-    hashtags=hashtags,
-    current_user=current_user,
-    db=db,
-    file=file
+@router.post(
+    "/transformation/roundcorners",
+    response_model=ImageResponce
 )
+async def round_corners(
+    body: RoundCornersImageRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)
+):
+    """
+    The round_corners function takes an image ID and a radius,
+    and returns the original image with rounded corners.
+    
+    
+    :param body: RoundCornersImageRequest: Parse the request body
+    :param db: Session: Access the database
+    :param current_user: User: Get the user who is logged in
+    :return: A response object that contains the transformed image
+    :doc-author: Trelent
+    """
+    transform_params = {"radius": body.radius}
+    return await transform_image(
+        image_id=body.iamge_id,
+        transform_params=transform_params,
+        description=body.description,
+        db=db,
+        current_user=current_user
+    )
+
+
+@router.post(
+    "/transformation/grayscale",
+    response_model=ImageResponce
+)
+async def grayscale(
+    body: EffectImageRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)
+):
+    """
+    The grayscale function 
+    
+    :param body: EffectImageRequest: Get the image_id and description from the request body
+    :param db: Session: Get a database session
+    :param current_user: User: Get the user who is logged in
+    :return: A response object that contains the transformed image
+    :doc-author: Trelent
+    """
+    transform_params = {"effect": "grayscale"}
+    return await transform_image(
+        image_id=body.iamge_id,
+        transform_params=transform_params,
+        description=body.description,
+        db=db,
+        current_user=current_user
+    )
+
+
+@router.post(
+    "/transformation/sepia",
+    response_model=ImageResponce
+)
+async def sepia(
+    body: EffectImageRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(auth_service.get_current_user)
+):
+    """
+    The sepia function takes an image_id and a description,
+        then applies the sepia effect to the image.
+    
+    
+    :param body: EffectImageRequest: Get the image_id and description from the request body
+    :param db: Session: Get a database session
+    :param current_user: User: Get the user who is logged in
+    :return: A response object that contains the transformed image
+    :doc-author: Trelent
+    """
+    transform_params = {"effect": "sepia"}
+    return await transform_image(
+        image_id=body.iamge_id,
+        transform_params=transform_params,
+        description=body.description,
+        db=db,
+        current_user=current_user
+    )
