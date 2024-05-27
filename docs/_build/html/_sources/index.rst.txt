@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Rest API's documentation!
+Welcome to PhotoShare's documentation!
 ====================================
 
 .. toctree::
@@ -11,7 +11,7 @@ Welcome to Rest API's documentation!
   :caption: Contents:
 
 
-REST API main
+PhotoShare main
 ===================
 .. automodule:: main
   :members:
@@ -19,7 +19,7 @@ REST API main
   :show-inheritance:
 
 
-REST API repository images
+PhotoShare repository images
 ===============================
 .. automodule:: src.repository.images
   :members:
@@ -27,7 +27,7 @@ REST API repository images
   :show-inheritance:
 
 
-REST API repository ratings
+PhotoShare repository ratings
 ============================
 .. automodule:: src.repository.ratings
   :members:
@@ -35,7 +35,7 @@ REST API repository ratings
   :show-inheritance:
 
 
-REST API repository tags
+PhotoShare repository tags
 ============================
 .. automodule:: src.repository.tags
   :members:
@@ -43,7 +43,7 @@ REST API repository tags
   :show-inheritance:
 
 
-REST API repository users
+PhotoShare repository users
 ============================
 .. automodule:: src.repository.users
   :members:
@@ -51,7 +51,7 @@ REST API repository users
   :show-inheritance:
 
 
-REST API routes admin
+PhotoShare routes admin
 =========================
 .. automodule:: src.routes.admin
   :members:
@@ -59,7 +59,7 @@ REST API routes admin
   :show-inheritance:
 
 
-REST API routes auth
+PhotoShare routes auth
 =========================
 .. automodule:: src.routes.auth
   :members:
@@ -67,7 +67,7 @@ REST API routes auth
   :show-inheritance:
 
 
-REST API routes comments
+PhotoShare routes comments
 =========================
 .. automodule:: src.routes.comments
   :members:
@@ -75,7 +75,7 @@ REST API routes comments
   :show-inheritance:
 
 
-REST API routes images
+PhotoShare routes images
 =========================
 .. automodule:: src.routes.images
   :members:
@@ -83,7 +83,7 @@ REST API routes images
   :show-inheritance:
 
 
-REST API routes ratings
+PhotoShare routes ratings
 =========================
 .. automodule:: src.routes.ratings
   :members:
@@ -91,7 +91,7 @@ REST API routes ratings
   :show-inheritance:
 
 
-REST API routes users
+PhotoShare routes users
 =========================
 .. automodule:: src.routes.users
   :members:
@@ -99,7 +99,7 @@ REST API routes users
   :show-inheritance:
 
 
-REST API service auth
+PhotoShare service auth
 =========================
 .. automodule:: src.services.auth
   :members:
@@ -107,7 +107,7 @@ REST API service auth
   :show-inheritance:
 
 
-REST API service email
+PhotoShare service email
 =========================
 .. automodule:: src.services.email
   :members:
@@ -115,7 +115,7 @@ REST API service email
   :show-inheritance:
 
 
-REST API utils image_utils
+PhotoShare utils image_utils
 ============================
 .. automodule:: src.utils.image_utils
   :members:
@@ -123,7 +123,7 @@ REST API utils image_utils
   :show-inheritance:
 
 
-REST API utils qr_code
+PhotoShare utils qr_code
 =========================
 .. automodule:: src.utils.qr_code
   :members:
@@ -131,7 +131,7 @@ REST API utils qr_code
   :show-inheritance:
 
 
-REST API utils users
+PhotoShare utils users
 =========================
 .. automodule:: src.utils.users
   :members:

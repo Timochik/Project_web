@@ -5,38 +5,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to Rest API’s documentation! &#8212; PhotoShare  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <title>Welcome to PhotoShare’s documentation! &#8212; PhotoShare  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=0f882399" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-
-  
-  
-
+    <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">PhotoShare  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to PhotoShare’s documentation!</a></li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
-  <section id="welcome-to-rest-api-s-documentation">
-<h1>Welcome to Rest API’s documentation!<a class="headerlink" href="#welcome-to-rest-api-s-documentation" title="Link to this heading">¶</a></h1>
+  <section id="welcome-to-photoshare-s-documentation">
+<h1>Welcome to PhotoShare’s documentation!<a class="headerlink" href="#welcome-to-photoshare-s-documentation" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 </section>
 <section id="module-main">
-<span id="rest-api-main"></span><h1>REST API main<a class="headerlink" href="#module-main" title="Link to this heading">¶</a></h1>
+<span id="photoshare-main"></span><h1>PhotoShare main<a class="headerlink" href="#module-main" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="main.main">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.main" title="Link to this definition">¶</a></dt>
@@ -59,7 +62,7 @@ in JSON format. This is an example of how to use FastAPI to create a ReST API.</
 
 </section>
 <section id="module-src.repository.images">
-<span id="rest-api-repository-images"></span><h1>REST API repository images<a class="headerlink" href="#module-src.repository.images" title="Link to this heading">¶</a></h1>
+<span id="photoshare-repository-images"></span><h1>PhotoShare repository images<a class="headerlink" href="#module-src.repository.images" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.repository.images.create_images_post">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.images.</span></span><span class="sig-name descname"><span class="pre">create_images_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashtags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UploadFile</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Post</span></span></span><a class="headerlink" href="#src.repository.images.create_images_post" title="Link to this definition">¶</a></dt>
@@ -189,9 +192,9 @@ If it is provided, then we’ll use its value as our new description for this po
 </dd></dl>
 
 </section>
-<section id="module-src.repository.ratings">
-<span id="rest-api-repository-ratings"></span><h1>REST API repository ratings<a class="headerlink" href="#module-src.repository.ratings" title="Link to this heading">¶</a></h1>
-<dl class="py function">
+<section id="photoshare-repository-ratings">
+<h1>PhotoShare repository ratings<a class="headerlink" href="#photoshare-repository-ratings" title="Link to this heading">¶</a></h1>
+<dl class="py function" id="module-src.repository.ratings">
 <dt class="sig sig-object py" id="src.repository.ratings.calculate_average_rating">
 <span class="sig-prename descclassname"><span class="pre">src.repository.ratings.</span></span><span class="sig-name descname"><span class="pre">calculate_average_rating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.repository.ratings.calculate_average_rating" title="Link to this definition">¶</a></dt>
 <dd><p>The calculate_average_rating function calculates the average rating for a specific image.</p>
@@ -276,7 +279,7 @@ If it is provided, then we’ll use its value as our new description for this po
 
 </section>
 <section id="module-src.repository.tags">
-<span id="rest-api-repository-tags"></span><h1>REST API repository tags<a class="headerlink" href="#module-src.repository.tags" title="Link to this heading">¶</a></h1>
+<span id="photoshare-repository-tags"></span><h1>PhotoShare repository tags<a class="headerlink" href="#module-src.repository.tags" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.repository.tags.get_or_create_tag">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.tags.</span></span><span class="sig-name descname"><span class="pre">get_or_create_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.repository.tags.get_or_create_tag" title="Link to this definition">¶</a></dt>
@@ -299,7 +302,7 @@ If it is provided, then we’ll use its value as our new description for this po
 
 </section>
 <section id="module-src.repository.users">
-<span id="rest-api-repository-users"></span><h1>REST API repository users<a class="headerlink" href="#module-src.repository.users" title="Link to this heading">¶</a></h1>
+<span id="photoshare-repository-users"></span><h1>PhotoShare repository users<a class="headerlink" href="#module-src.repository.users" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.repository.users.add_first_user_admin">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">add_first_user_admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db:</span> <span class="pre">~sqlalchemy.orm.session.Session</span> <span class="pre">=</span> <span class="pre">&lt;sqlalchemy.orm.session.Session</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.users.add_first_user_admin" title="Link to this definition">¶</a></dt>
@@ -506,7 +509,7 @@ the db session is committed.</p>
 
 </section>
 <section id="module-src.routes.admin">
-<span id="rest-api-routes-admin"></span><h1>REST API routes admin<a class="headerlink" href="#module-src.routes.admin" title="Link to this heading">¶</a></h1>
+<span id="photoshare-routes-admin"></span><h1>PhotoShare routes admin<a class="headerlink" href="#module-src.routes.admin" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.routes.admin.ban_user">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.admin.</span></span><span class="sig-name descname"><span class="pre">ban_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(is_admin)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.admin.ban_user" title="Link to this definition">¶</a></dt>
@@ -573,7 +576,7 @@ It returns the User object of the unbanned user.</p>
 
 </section>
 <section id="module-src.routes.auth">
-<span id="rest-api-routes-auth"></span><h1>REST API routes auth<a class="headerlink" href="#module-src.routes.auth" title="Link to this heading">¶</a></h1>
+<span id="photoshare-routes-auth"></span><h1>PhotoShare routes auth<a class="headerlink" href="#module-src.routes.auth" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.routes.auth.confirmed_email">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.auth.</span></span><span class="sig-name descname"><span class="pre">confirmed_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.auth.confirmed_email" title="Link to this definition">¶</a></dt>
@@ -698,9 +701,9 @@ then creates a new user in our database using repository_users’ create_user() 
 </dd></dl>
 
 </section>
-<section id="module-src.routes.comments">
-<span id="rest-api-routes-comments"></span><h1>REST API routes comments<a class="headerlink" href="#module-src.routes.comments" title="Link to this heading">¶</a></h1>
-<dl class="py function">
+<section id="photoshare-routes-comments">
+<h1>PhotoShare routes comments<a class="headerlink" href="#photoshare-routes-comments" title="Link to this heading">¶</a></h1>
+<dl class="py function" id="module-src.routes.comments">
 <dt class="sig sig-object py" id="src.routes.comments.change_comment">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.comments.</span></span><span class="sig-name descname"><span class="pre">change_comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PutCommentReques</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.comments.change_comment" title="Link to this definition">¶</a></dt>
 <dd><p>The change_comment function allows a user to change the text of their comment.</p>
@@ -829,7 +832,7 @@ The user who created this comment is determined by the JWT token in the request 
 
 </section>
 <section id="module-src.routes.images">
-<span id="rest-api-routes-images"></span><h1>REST API routes images<a class="headerlink" href="#module-src.routes.images" title="Link to this heading">¶</a></h1>
+<span id="photoshare-routes-images"></span><h1>PhotoShare routes images<a class="headerlink" href="#module-src.routes.images" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.routes.images.crop_image_view">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.images.</span></span><span class="sig-name descname"><span class="pre">crop_image_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CropImageRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.images.crop_image_view" title="Link to this definition">¶</a></dt>
@@ -1030,7 +1033,7 @@ It then creates an entry in the database for that image with all of its informat
 
 </section>
 <section id="module-src.routes.ratings">
-<span id="rest-api-routes-ratings"></span><h1>REST API routes ratings<a class="headerlink" href="#module-src.routes.ratings" title="Link to this heading">¶</a></h1>
+<span id="photoshare-routes-ratings"></span><h1>PhotoShare routes ratings<a class="headerlink" href="#module-src.routes.ratings" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.routes.ratings.delete_image_rating">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.ratings.</span></span><span class="sig-name descname"><span class="pre">delete_image_rating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rating_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.ratings.delete_image_rating" title="Link to this definition">¶</a></dt>
@@ -1117,7 +1120,7 @@ It then creates an entry in the database for that image with all of its informat
 
 </section>
 <section id="module-src.routes.users">
-<span id="rest-api-routes-users"></span><h1>REST API routes users<a class="headerlink" href="#module-src.routes.users" title="Link to this heading">¶</a></h1>
+<span id="photoshare-routes-users"></span><h1>PhotoShare routes users<a class="headerlink" href="#module-src.routes.users" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.routes.users.get_user_by_username">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.users.</span></span><span class="sig-name descname"><span class="pre">get_user_by_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.users.get_user_by_username" title="Link to this definition">¶</a></dt>
@@ -1206,7 +1209,7 @@ Finally, it updates the avatar field in our database with this new url.</p>
 
 </section>
 <section id="module-src.services.auth">
-<span id="rest-api-service-auth"></span><h1>REST API service auth<a class="headerlink" href="#module-src.services.auth" title="Link to this heading">¶</a></h1>
+<span id="photoshare-service-auth"></span><h1>PhotoShare service auth<a class="headerlink" href="#module-src.services.auth" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.services.auth.Auth">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">Auth</span></span><a class="headerlink" href="#src.services.auth.Auth" title="Link to this definition">¶</a></dt>
@@ -1483,7 +1486,7 @@ If not, it raises an HTTPException with status code 403 (Forbidden).</p>
 
 </section>
 <section id="module-src.services.email">
-<span id="rest-api-service-email"></span><h1>REST API service email<a class="headerlink" href="#module-src.services.email" title="Link to this heading">¶</a></h1>
+<span id="photoshare-service-email"></span><h1>PhotoShare service email<a class="headerlink" href="#module-src.services.email" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.services.email.send_email">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.email.</span></span><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EmailStr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.email.send_email" title="Link to this definition">¶</a></dt>
@@ -1517,7 +1520,7 @@ If not, it raises an HTTPException with status code 403 (Forbidden).</p>
 
 </section>
 <section id="module-src.utils.image_utils">
-<span id="rest-api-utils-image-utils"></span><h1>REST API utils image_utils<a class="headerlink" href="#module-src.utils.image_utils" title="Link to this heading">¶</a></h1>
+<span id="photoshare-utils-image-utils"></span><h1>PhotoShare utils image_utils<a class="headerlink" href="#module-src.utils.image_utils" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.utils.image_utils.transform_image">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.image_utils.</span></span><span class="sig-name descname"><span class="pre">transform_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_id:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform_params:</span> <span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db:</span> <span class="pre">~sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user:</span> <span class="pre">~src.database.models.User</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service:</span> <span class="pre">&lt;module</span> <span class="pre">'cloudinary'</span> <span class="pre">from</span> <span class="pre">'/Users/nuambevos/Library/Caches/pypoetry/virtualenvs/project-web-KORtPa4P-py3.11/lib/python3.11/site-packages/cloudinary/__init__.py'&gt;</span> <span class="pre">=</span> <span class="pre">&lt;module</span> <span class="pre">'cloudinary'</span> <span class="pre">from</span> <span class="pre">'/Users/nuambevos/Library/Caches/pypoetry/virtualenvs/project-web-KORtPa4P-py3.11/lib/python3.11/site-packages/cloudinary/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Post</span></span></span><a class="headerlink" href="#src.utils.image_utils.transform_image" title="Link to this definition">¶</a></dt>
@@ -1549,7 +1552,7 @@ Then it gets qr code url for new</p>
 
 </section>
 <section id="module-src.utils.qr_code">
-<span id="rest-api-utils-qr-code"></span><h1>REST API utils qr_code<a class="headerlink" href="#module-src.utils.qr_code" title="Link to this heading">¶</a></h1>
+<span id="photoshare-utils-qr-code"></span><h1>PhotoShare utils qr_code<a class="headerlink" href="#module-src.utils.qr_code" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.utils.qr_code.delete_qr_code_by_url">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.qr_code.</span></span><span class="sig-name descname"><span class="pre">delete_qr_code_by_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service:</span> <span class="pre">&lt;module</span> <span class="pre">'cloudinary'</span> <span class="pre">from</span> <span class="pre">'/Users/nuambevos/Library/Caches/pypoetry/virtualenvs/project-web-KORtPa4P-py3.11/lib/python3.11/site-packages/cloudinary/__init__.py'&gt;</span> <span class="pre">=</span> <span class="pre">&lt;module</span> <span class="pre">'cloudinary'</span> <span class="pre">from</span> <span class="pre">'/Users/nuambevos/Library/Caches/pypoetry/virtualenvs/project-web-KORtPa4P-py3.11/lib/python3.11/site-packages/cloudinary/__init__.py'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.qr_code.delete_qr_code_by_url" title="Link to this definition">¶</a></dt>
@@ -1593,7 +1596,7 @@ If file not founr raises FileNotFoundError error.</p>
 
 </section>
 <section id="module-src.utils.users">
-<span id="rest-api-utils-users"></span><h1>REST API utils users<a class="headerlink" href="#module-src.utils.users" title="Link to this heading">¶</a></h1>
+<span id="photoshare-utils-users"></span><h1>PhotoShare utils users<a class="headerlink" href="#module-src.utils.users" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.utils.users.add_first_user_admin">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.users.</span></span><span class="sig-name descname"><span class="pre">add_first_user_admin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.users.add_first_user_admin" title="Link to this definition">¶</a></dt>
@@ -1666,30 +1669,152 @@ It raises a ValueError if the passwords do not match.</p>
 </section>
 
 
+            <div class="clearer"></div>
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">PhotoShare</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-  </ul></li>
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to PhotoShare’s documentation!</a></li>
+<li><a class="reference internal" href="#module-main">PhotoShare main</a><ul>
+<li><a class="reference internal" href="#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#main.read_root"><code class="docutils literal notranslate"><span class="pre">read_root()</span></code></a></li>
 </ul>
-</div>
+</li>
+<li><a class="reference internal" href="#module-src.repository.images">PhotoShare repository images</a><ul>
+<li><a class="reference internal" href="#src.repository.images.create_images_post"><code class="docutils literal notranslate"><span class="pre">create_images_post()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.images.del_image"><code class="docutils literal notranslate"><span class="pre">del_image()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.images.get_image"><code class="docutils literal notranslate"><span class="pre">get_image()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.images.get_images"><code class="docutils literal notranslate"><span class="pre">get_images()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.images.put_image"><code class="docutils literal notranslate"><span class="pre">put_image()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#photoshare-repository-ratings">PhotoShare repository ratings</a><ul>
+<li><a class="reference internal" href="#src.repository.ratings.calculate_average_rating"><code class="docutils literal notranslate"><span class="pre">calculate_average_rating()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.ratings.create_rating"><code class="docutils literal notranslate"><span class="pre">create_rating()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.ratings.delete_rating"><code class="docutils literal notranslate"><span class="pre">delete_rating()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.ratings.get_ratings"><code class="docutils literal notranslate"><span class="pre">get_ratings()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.repository.tags">PhotoShare repository tags</a><ul>
+<li><a class="reference internal" href="#src.repository.tags.get_or_create_tag"><code class="docutils literal notranslate"><span class="pre">get_or_create_tag()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.repository.users">PhotoShare repository users</a><ul>
+<li><a class="reference internal" href="#src.repository.users.add_first_user_admin"><code class="docutils literal notranslate"><span class="pre">add_first_user_admin()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.confirmed_email"><code class="docutils literal notranslate"><span class="pre">confirmed_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.create_user"><code class="docutils literal notranslate"><span class="pre">create_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.get_user_by_email"><code class="docutils literal notranslate"><span class="pre">get_user_by_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.get_user_by_id"><code class="docutils literal notranslate"><span class="pre">get_user_by_id()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.get_user_by_username"><code class="docutils literal notranslate"><span class="pre">get_user_by_username()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.update_avatar"><code class="docutils literal notranslate"><span class="pre">update_avatar()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.update_token"><code class="docutils literal notranslate"><span class="pre">update_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.update_user"><code class="docutils literal notranslate"><span class="pre">update_user()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.routes.admin">PhotoShare routes admin</a><ul>
+<li><a class="reference internal" href="#src.routes.admin.ban_user"><code class="docutils literal notranslate"><span class="pre">ban_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.admin.change_user_role"><code class="docutils literal notranslate"><span class="pre">change_user_role()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.admin.unban_user"><code class="docutils literal notranslate"><span class="pre">unban_user()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.routes.auth">PhotoShare routes auth</a><ul>
+<li><a class="reference internal" href="#src.routes.auth.confirmed_email"><code class="docutils literal notranslate"><span class="pre">confirmed_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.auth.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.auth.refresh_token"><code class="docutils literal notranslate"><span class="pre">refresh_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.auth.request_email"><code class="docutils literal notranslate"><span class="pre">request_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.auth.signup"><code class="docutils literal notranslate"><span class="pre">signup()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#photoshare-routes-comments">PhotoShare routes comments</a><ul>
+<li><a class="reference internal" href="#src.routes.comments.change_comment"><code class="docutils literal notranslate"><span class="pre">change_comment()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.comments.delete_comment"><code class="docutils literal notranslate"><span class="pre">delete_comment()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.comments.get_comment"><code class="docutils literal notranslate"><span class="pre">get_comment()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.comments.get_comments_by_image"><code class="docutils literal notranslate"><span class="pre">get_comments_by_image()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.comments.get_comments_by_user"><code class="docutils literal notranslate"><span class="pre">get_comments_by_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.comments.post_comment"><code class="docutils literal notranslate"><span class="pre">post_comment()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.routes.images">PhotoShare routes images</a><ul>
+<li><a class="reference internal" href="#src.routes.images.crop_image_view"><code class="docutils literal notranslate"><span class="pre">crop_image_view()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.delete_image"><code class="docutils literal notranslate"><span class="pre">delete_image()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.get_image"><code class="docutils literal notranslate"><span class="pre">get_image()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.get_images"><code class="docutils literal notranslate"><span class="pre">get_images()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.grayscale"><code class="docutils literal notranslate"><span class="pre">grayscale()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.put_image"><code class="docutils literal notranslate"><span class="pre">put_image()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.round_corners"><code class="docutils literal notranslate"><span class="pre">round_corners()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.sepia"><code class="docutils literal notranslate"><span class="pre">sepia()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.images.upload_file"><code class="docutils literal notranslate"><span class="pre">upload_file()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.routes.ratings">PhotoShare routes ratings</a><ul>
+<li><a class="reference internal" href="#src.routes.ratings.delete_image_rating"><code class="docutils literal notranslate"><span class="pre">delete_image_rating()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.ratings.get_average_rating"><code class="docutils literal notranslate"><span class="pre">get_average_rating()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.ratings.get_image_ratings"><code class="docutils literal notranslate"><span class="pre">get_image_ratings()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.ratings.rate_image"><code class="docutils literal notranslate"><span class="pre">rate_image()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.routes.users">PhotoShare routes users</a><ul>
+<li><a class="reference internal" href="#src.routes.users.get_user_by_username"><code class="docutils literal notranslate"><span class="pre">get_user_by_username()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.users.read_users_me"><code class="docutils literal notranslate"><span class="pre">read_users_me()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.users.update_avatar_user"><code class="docutils literal notranslate"><span class="pre">update_avatar_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.routes.users.update_my_profile"><code class="docutils literal notranslate"><span class="pre">update_my_profile()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.services.auth">PhotoShare service auth</a><ul>
+<li><a class="reference internal" href="#src.services.auth.Auth"><code class="docutils literal notranslate"><span class="pre">Auth</span></code></a><ul>
+<li><a class="reference internal" href="#src.services.auth.Auth.ALGORITHM"><code class="docutils literal notranslate"><span class="pre">Auth.ALGORITHM</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.SECRET_KEY"><code class="docutils literal notranslate"><span class="pre">Auth.SECRET_KEY</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.create_access_token"><code class="docutils literal notranslate"><span class="pre">Auth.create_access_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.create_email_token"><code class="docutils literal notranslate"><span class="pre">Auth.create_email_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.create_refresh_token"><code class="docutils literal notranslate"><span class="pre">Auth.create_refresh_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.decode_refresh_token"><code class="docutils literal notranslate"><span class="pre">Auth.decode_refresh_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.get_current_user"><code class="docutils literal notranslate"><span class="pre">Auth.get_current_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.get_email_from_token"><code class="docutils literal notranslate"><span class="pre">Auth.get_email_from_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.get_password_hash"><code class="docutils literal notranslate"><span class="pre">Auth.get_password_hash()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.oauth2_scheme"><code class="docutils literal notranslate"><span class="pre">Auth.oauth2_scheme</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.pwd_context"><code class="docutils literal notranslate"><span class="pre">Auth.pwd_context</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Auth.verify_password"><code class="docutils literal notranslate"><span class="pre">Auth.verify_password()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src.services.auth.check_is_admin_or_moderator"><code class="docutils literal notranslate"><span class="pre">check_is_admin_or_moderator()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.is_admin"><code class="docutils literal notranslate"><span class="pre">is_admin()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.is_admin_or_moderator"><code class="docutils literal notranslate"><span class="pre">is_admin_or_moderator()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.services.email">PhotoShare service email</a><ul>
+<li><a class="reference internal" href="#src.services.email.send_email"><code class="docutils literal notranslate"><span class="pre">send_email()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.utils.image_utils">PhotoShare utils image_utils</a><ul>
+<li><a class="reference internal" href="#src.utils.image_utils.transform_image"><code class="docutils literal notranslate"><span class="pre">transform_image()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.utils.qr_code">PhotoShare utils qr_code</a><ul>
+<li><a class="reference internal" href="#src.utils.qr_code.delete_qr_code_by_url"><code class="docutils literal notranslate"><span class="pre">delete_qr_code_by_url()</span></code></a></li>
+<li><a class="reference internal" href="#src.utils.qr_code.get_qr_code_by_url"><code class="docutils literal notranslate"><span class="pre">get_qr_code_by_url()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.utils.users">PhotoShare utils users</a><ul>
+<li><a class="reference internal" href="#src.utils.users.add_first_user_admin"><code class="docutils literal notranslate"><span class="pre">add_first_user_admin()</span></code></a></li>
+<li><a class="reference internal" href="#src.utils.users.get_input"><code class="docutils literal notranslate"><span class="pre">get_input()</span></code></a></li>
+<li><a class="reference internal" href="#src.utils.users.validate_passwords"><code class="docutils literal notranslate"><span class="pre">validate_passwords()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -1700,32 +1825,26 @@ It raises a ValueError if the passwords do not match.</p>
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &#169;2024, Daiquiri club.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">PhotoShare  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to PhotoShare’s documentation!</a></li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Daiquiri club.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
   </body>
 </html>
