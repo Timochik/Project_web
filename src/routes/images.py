@@ -1,5 +1,4 @@
 from fastapi import Depends, File, HTTPException, UploadFile, APIRouter, status
-from fastapi.responses import FileResponse, HTMLResponse
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -14,6 +13,7 @@ from src.database.db import get_db
 from src.repository import images as repository_images
 from src.services.auth import auth_service, check_is_admin_or_moderator
 from src.utils.image_utils import transform_image
+
 
 router = APIRouter(prefix='/images', tags=["images"])
 

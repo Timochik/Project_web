@@ -1,7 +1,8 @@
 from aioconsole import ainput
-from email_validator import validate_email, EmailNotValidError
+from email_validator import validate_email
 
 from src.repository.users import add_first_user_admin as add_admin
+
 
 async def get_input(prompt: str, validate: callable = None):
         """

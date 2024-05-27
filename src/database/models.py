@@ -1,9 +1,17 @@
 
 
-from sqlalchemy import Column, Date, DateTime, Integer, String, Table, ForeignKey, func, Enum as SQLAEnum, Boolean, Float
-from datetime import datetime
+from sqlalchemy import (
+    Column, 
+    DateTime,
+    Integer,
+    String,
+    Table,
+    ForeignKey,
+    func,
+    Enum as SQLAEnum,
+    Boolean,
+    Float)
 from sqlalchemy.orm import relationship
-
 from sqlalchemy.ext.declarative import declarative_base
 from enum import Enum
 
@@ -88,28 +96,3 @@ class Rating(Base):
 
     user = relationship("User", back_populates="ratings")
     image = relationship("Post", back_populates="ratings")
-
-# class Tag(Base):
-#     __tablename__ = "tags"
-#     id = Column(Integer, primary_key=True, index = True)
-#     name = Column(String, unique=True)
-
-#     posts = relationship("Post", secondary=post_hashtags, back_populates="tags")
-
-#     def __repr__(self):
-#         return self.name
-    
-
-# class Comment(Base):
-#     __tablename__ = "comments"
-#     id = Column(Integer, primary_key=True, index = True)
-#     text = Column(String)
-#     created_at = Column(DateTime, default=func.now())
-#     updated_at = Column(DateTime, default=func.now())
-
-#     post_id = Column(Integer, ForeignKey("posts.id"))
-#     post = relationship("auth.models.Post", back_populates="comments")
-
-#     author_id = Column(Integer, ForeignKey("users.id"))
-#     author = relationship("auth.models.User", back_populates="comments")
-    

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from src.database.models import Rating, User, Post, UserRole
-from src.schemas import RatingCreate
 from fastapi import HTTPException, status
+
+from src.database.models import Rating, User, Post, UserRole
 
 
 async def create_rating(db: Session, user: User, image: Post, rating_value: int) -> Rating:
