@@ -21,8 +21,8 @@ router = APIRouter(prefix='/images', tags=["images"])
 async def upload_file(description: str, hashtags: List[str], db: Session = Depends(get_db), current_user: User = Depends(auth_service.get_current_user),   file: UploadFile = File(...)):
     """
     The upload_file function is used to upload a file to the server.
-        The function takes in a description, hashtags, and an image file.
-        It then creates an entry in the database for that image with all of its information.
+            The function takes in a description, hashtags, and an image file.
+            It then creates an entry in the database for that image with all of its information.
     
     :param description: str: Get the description of the image
     :param hashtags: List[str]: Get the hashtags from the request body
@@ -50,9 +50,10 @@ async def get_image(
         The function returns a JSON object containing all information about that particular image.
     
     :param image_id : int: Get the image with that id from the database
+    :param user_id: int: Get the image of another user
     :param db: Session: Get the database session
     :param current_user: User: Get the current user
-    :return: A json object, which contains the info
+    :return: A single image from the database
     :doc-author: Trelent
     """
     if not user_id:
@@ -66,11 +67,15 @@ async def get_images(
     current_user: User = Depends(auth_service.get_current_user)):
     """
     The get_images function returns a list of images that the current user has uploaded.
+                
+            
+            
         
     
+    :param user_id: int: Get the images for a specific user
     :param db: Session: Pass the database connection to the repository layer
     :param current_user: User: Get the current user from the database
-    :return: A list of image objects
+    :return: A list of images that the current user has uploaded
     :doc-author: Trelent
     """
     if not user_id:
@@ -84,12 +89,14 @@ async def delete_image(
     current_user: User = Depends(auth_service.get_current_user)):
     """
     The delete_image function deletes an image from the database.
+            
+        
         
     
     :param image_id: int: Identify the image to be deleted
     :param db: Session: Pass the database session to the repository layer
     :param current_user: User: Get the current user from the auth_service
-    :return: A dictionary
+    :return: A dictionary with the following keys:
     :doc-author: Trelent
     """
     return await repository_images.del_image(image_id, db, current_user)
@@ -101,13 +108,13 @@ async def put_image(image_id: int , new_description: str,
                        current_user: User = Depends(auth_service.get_current_user)):
     """
     The put_image function updates the description of an image.
-        The user must be logged in and own the image to update it.
+            The user must be logged in and own the image to update it.
     
-    :param image_id: int: Identify which image is being updated
+    :param image_id: int: Identify which image is being deleted
     :param new_description: str: Update the description of an image
     :param db: Session: Pass the database session to the repository function
     :param current_user: User: Get the current user
-    :return: New image
+    :return: A new image
     :doc-author: Trelent
     """
     return await repository_images.put_image(image_id, new_description, current_user, db)

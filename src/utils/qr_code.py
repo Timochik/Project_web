@@ -12,7 +12,8 @@ async def get_qr_code_by_url(url: str, service: cloudinary=cloudinary) -> str:
     The get_qr_code_by_url function takes a url as an argument and returns the URL of a QR code image.
     
     :param url: str: Specify the url that will be encoded in the qr code
-    :return: The url of the qr code image
+    :param service: cloudinary: Specify the cloudinary service that will be used to upload the image
+    :return: The url of a qr code image
     :doc-author: Trelent
     """
     qr = qrcode.QRCode(
@@ -54,8 +55,11 @@ async def delete_qr_code_by_url(url: str, service: cloudinary=cloudinary) -> Non
     """
     The delete_qr_code_by_url function deletes a QR code from Cloudinary.
     If file not founr raises FileNotFoundError error.
+        
+    
     
     :param url: str: Specify the url of the qr code to be deleted
+    :param service: cloudinary: Specify the cloudinary service to use
     :return: None
     :doc-author: Trelent
     """

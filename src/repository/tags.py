@@ -5,14 +5,12 @@ from src.database.models import Hashtag
 
 async def get_or_create_tag(db: Session, name: str):
     """
-    Retrieves a tag from the database with the given name, or creates a new tag if it doesn't exist.
-
-    Args:
-        db (Session): The database session.\n
-        name (str): The name of the tag.\n
-
-    Returns:
-        Tag: The retrieved or created tag.
+    The get_or_create_tag function retrieves a tag from the database with the given name, or creates a new tag if it doesn't exist.
+    
+    :param db: Session: Pass the database session to the function
+    :param name: str: Specify the name of the tag
+    :return: A tag
+    :doc-author: Trelent
     """
     tag = db.query(Hashtag).filter(Hashtag.name == name).first()
     if not tag:

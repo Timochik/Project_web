@@ -28,7 +28,7 @@ class Auth:
         
         :param self: Represent the instance of the class
         :param plain_password: Pass in the password that is entered by the user
-        :param hashed_password: Check if the password is correct
+        :param hashed_password: Check if the password entered by the user is correct
         :return: True if the password is correct, and false otherwise
         :doc-author: Trelent
         """
@@ -57,7 +57,7 @@ class Auth:
         :param self: Refer to the current object
         :param data: dict: Pass the data to be encoded in the jwt token
         :param expires_delta: Optional[float]: Set the expiration time of the access token
-        :return: A token that is encoded with the user's information,
+        :return: A token that is encoded with the user's information
         :doc-author: Trelent
         """
         to_encode = data.copy()
@@ -95,8 +95,8 @@ class Auth:
     async def decode_refresh_token(self, refresh_token: str):
         """
         The decode_refresh_token function takes a refresh token and decodes it.
-            If the scope is 'refresh_token', then the email address of the user is returned.
-            Otherwise, an HTTPException with status code 401 (UNAUTHORIZED) is raised.
+                    If the scope is 'refresh_token', then the email address of the user is returned.
+                    Otherwise, an HTTPException with status code 401 (UNAUTHORIZED) is raised.
         
         :param self: Represent the instance of the class
         :param refresh_token: str: Pass in the refresh token that is sent to the server
@@ -189,15 +189,42 @@ auth_service = Auth()
 
 
 async def is_admin(current_user: User =  Depends(auth_service.get_current_user)) -> User:
+        """
+        The is_admin function is a dependency that checks if the user has admin permissions.
+        If not, it raises an HTTPException with status code 403 (Forbidden).
+        
+        
+        :param current_user: User: Get the current user from the auth_service
+        :return: A user object, which is the same as the current_user parameter
+        :doc-author: Trelent
+        """
         if current_user.role != UserRole.admin:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
         return current_user
         
 async def is_admin_or_moderator(current_user: User =  Depends(auth_service.get_current_user)) -> User:
+    """
+    The is_admin_or_moderator function is a dependency that checks if the current user has admin or moderator permissions.
+    If not, it raises an HTTPException with status code 403 (Forbidden).
+    
+    
+    :param current_user: User: Get the current user from the auth_service
+    :return: The current user if the role is admin or moderator
+    :doc-author: Trelent
+    """
     if current_user.role not in ["admin", "moderator"]:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions4")
     return current_user
 
 async def check_is_admin_or_moderator(current_user: User) -> bool:
+    """
+    The check_is_admin_or_moderator function checks if the current user is an admin or moderator.
+        If so, it returns True. Otherwise, it raises a HTTPException with status code 403 (Forbidden).
+    
+    
+    :param current_user: User: Pass the current user into the function
+    :return: True if the user is an admin or moderator
+    :doc-author: Trelent
+    """
     if current_user.role in ["admin", "moderator"]:
         return True

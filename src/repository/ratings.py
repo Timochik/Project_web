@@ -6,16 +6,14 @@ from fastapi import HTTPException, status
 
 async def create_rating(db: Session, user: User, image: Post, rating_value: int) -> Rating:
     """
-    Create a new rating for an image by a user.
-
-    Args:
-        db (Session): Database session.
-        user (User): The user creating the rating.
-        image (Post): The image being rated.
-        rating_value (int): The value of the rating.
-
-    Returns:
-        Rating: The created rating.
+    The create_rating function creates a new rating for an image by a user.
+    
+    :param db: Session: Access the database
+    :param user: User: Get the user that is creating the rating
+    :param image: Post: Pass in the image being rated
+    :param rating_value: int: Pass in the value of the rating
+    :return: A rating object
+    :doc-author: Trelent
     """
     existing_rating = db.query(Rating).filter(Rating.user_id == user.id, Rating.image_id == image.id).first()
     if existing_rating:
@@ -33,29 +31,25 @@ async def create_rating(db: Session, user: User, image: Post, rating_value: int)
 
 async def get_ratings(db: Session, image_id: int):
     """
-    Get all ratings for a specific image.
-
-    Args:
-        db (Session): Database session.
-        image_id (int): ID of the image.
-
-    Returns:
-        List[Rating]: List of ratings for the image.
+    The get_ratings function returns a list of ratings for a specific image.
+    
+    :param db: Session: Pass the database session to the function
+    :param image_id: int: Filter the database query
+    :return: A list of rating objects
+    :doc-author: Trelent
     """
     return db.query(Rating).filter(Rating.image_id == image_id).all()
 
 
 async def delete_rating(db: Session, rating_id: int, current_user: User):
     """
-    Delete a rating by ID.
-
-    Args:
-        db (Session): Database session.
-        rating_id (int): ID of the rating to delete.
-        current_user (User): The current user performing the delete action.
-
-    Returns:
-        dict: Confirmation message.
+    The delete_rating function deletes a rating by ID.
+    
+    :param db: Session: Pass the database session to the function
+    :param rating_id: int: Get the rating that is to be updated
+    :param current_user: User: Ensure that only the user who created the rating can delete it
+    :return: A dictionary with a message key and the value &quot;rating deleted successfully&quot;
+    :doc-author: Trelent
     """
     rating = db.query(Rating).filter(Rating.id == rating_id).first()
     if not rating:
@@ -71,14 +65,12 @@ async def delete_rating(db: Session, rating_id: int, current_user: User):
 
 def calculate_average_rating(db: Session, image_id: int) -> float:
     """
-    Calculate the average rating for a specific image.
-
-    Args:
-        db (Session): Database session.
-        image_id (int): ID of the image.
-
-    Returns:
-        float: The average rating for the image.
+    The calculate_average_rating function calculates the average rating for a specific image.
+    
+    :param db: Session: Pass in the database session
+    :param image_id: int: Specify the image id
+    :return: The average rating for a specific image
+    :doc-author: Trelent
     """
     ratings = db.query(Rating).filter(Rating.image_id == image_id).all()
 
