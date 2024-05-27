@@ -34,7 +34,10 @@ async def apply_effect(image_id, effect, description: str, user: User, db: Sessi
   
   image = get_image(image_id, user, db)
 
+<<<<<<< Updated upstream
   # Extract public ID from the image URL (assuming the format)
+=======
+>>>>>>> Stashed changes
   effected_url = CloudinaryImage(image).image(transformation=[{"effect": effect}])
   print(f"Secure URL: {effected_url}")
 
