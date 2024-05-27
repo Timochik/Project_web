@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
 
 from src.database.db import get_db
-from src.database.models import User, UserRole
-from src.services.auth import auth_service, is_admin, is_admin_or_moderator
+from src.database.models import User
+from src.services.auth import is_admin
 from src.schemas import UserOut, RoleChangeRequest
-from src.repository import images as repository_images
 
 
 router = APIRouter(prefix="/admin", tags=["admin"])

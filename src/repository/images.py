@@ -1,6 +1,9 @@
 from typing import List
 import uuid
-from fastapi import File, HTTPException, UploadFile, status
+import cloudinary
+import cloudinary.uploader
+from fastapi import HTTPException, UploadFile, status
+from sqlalchemy import and_
 from sqlalchemy.orm import Session
 
 from src.database.models import Post, User
@@ -8,10 +11,7 @@ from src.utils.qr_code import get_qr_code_by_url
 from src.repository.tags import get_or_create_tag
 from src.conf.config import settings
 from src.services.auth import check_is_admin_or_moderator
-from sqlalchemy import and_
 
-import cloudinary
-import cloudinary.uploader
 
 cloudinary.config(
         cloud_name=settings.cloudinary_name,

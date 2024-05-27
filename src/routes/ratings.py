@@ -7,6 +7,7 @@ from src.services.auth import auth_service
 from src.schemas import RatingCreate, RatingResponse
 from src.repository.ratings import create_rating, get_ratings, delete_rating, calculate_average_rating
 
+
 router = APIRouter(prefix="/ratings", tags=["ratings"])
 
 

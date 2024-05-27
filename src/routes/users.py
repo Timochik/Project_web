@@ -10,6 +10,7 @@ from src.services.auth import auth_service
 from src.conf.config import settings
 from src.schemas import UserDb, UserUpdate
 
+
 router = APIRouter(prefix="/users", tags=["users"])
 
 

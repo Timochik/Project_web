@@ -1,6 +1,5 @@
 from libgravatar import Gravatar
 from sqlalchemy.orm import Session
-from fastapi import HTTPException
 
 from src.database.db import get_db
 from src.database.models import User
