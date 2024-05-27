@@ -195,7 +195,7 @@ async def is_admin(current_user: User =  Depends(auth_service.get_current_user))
         
 async def is_admin_or_moderator(current_user: User =  Depends(auth_service.get_current_user)) -> User:
     if current_user.role not in ["admin", "moderator"]:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions4")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
     return current_user
 
 async def check_is_admin_or_moderator(current_user: User) -> bool:
