@@ -120,3 +120,27 @@ async def put_image(image_id:int, new_description:str, current_user: User, db: S
     db.commit()
     db.refresh(new_images)
     return new_images
+
+
+async def get_image_by_tag(hashtag_name: str, db: Session):
+  """
+  This function asynchronously fetches image URLs from the database 
+  based on a provided hashtag name.
+
+  Args:
+      hashtag_name: The name of the hashtag to search for (str).
+      db: A database session object used for querying the database (Session).
+
+  Returns:
+      A list of image URLs associated with the provided hashtag (List[str]).
+  """
+
+  from database.models import Base, Hashtag
+
+  # Build the SQLAlchemy query to join Post and Hashtag tables
+  query = db.query(Post.image_url).join(Post.hashtags).filter(Hashtag.name == hashtag_name).all()
+
+  # Extract image URLs from the query results
+  image_urls = [image_url for image_url, in query]
+
+  return image_urls

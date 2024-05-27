@@ -120,3 +120,30 @@ async def round_corners(image_id: int, radius: int, description: str, hashtags: 
     user=user,
     db=db
 )
+
+@router.get("/get_image_by_tag")
+async def get_images_by_tag(
+    hashtag_name: str,  # Name of the hashtag to search for (without the # symbol)
+    db: Session = Depends(get_db)  # Database session dependency (injected using Depends)
+): 
+
+    """
+    Fetches images associated with a given hashtag from the database asynchronously.
+
+    Args:
+        hashtag_name (str): The hashtag name to query (without the # symbol).
+        db (Session): The database session object (injected using Depends).
+
+    Returns:
+        List[Image]: A list of Image objects matching the provided hashtag.
+
+    Raises:
+        Exception: If an error occurs while fetching images from the database.
+    """
+
+    from src.repository.images import get_image_by_tag
+
+    try:
+        return await get_image_by_tag(hashtag_name=hashtag_name, db=db)
+    except Exception as e:
+        print( f"Error fetching images for hashtag '{hashtag_name}': {e}")
