@@ -29,7 +29,6 @@ async def post_comment(
     The post_comment function creates a new comment for the image with the given id.
     The user who created this comment is determined by the JWT token in the request header.
     
-    
     :param body: PostCommentReques: Get the data from the request body
     :param db: Session: Get the database session
     :param current_user: User: Get the user that is currently logged in
@@ -68,7 +67,7 @@ async def get_comment(
     
     :param comment_id: int: Specify the comment id
     :param db: Session: Get the database session
-    :return: A comment
+    :return: A comment with the given id
     :doc-author: Trelent
     """
     comment = db.query(Comments).filter(
@@ -94,10 +93,9 @@ async def get_comments_by_image(
     The get_comments_by_image function returns a list of comments for the image with the given id.
     If no image is found, it raises an HTTPException with status code 404 and detail 'Image not found';.
     
-    
     :param image_id: int: Get the image id from the url
     :param db: Session: Get the database session
-    :return: A list of comments
+    :return: A list of comments for the image with the given id
     :doc-author: Trelent
     """
     image = db.query(Post).filter(
@@ -128,7 +126,7 @@ async def get_comments_by_user(
     
     :param user_id: int: Specify the user_id of the user we want to get comments for
     :param db: Session: Get the database session
-    :return: A list of comments
+    :return: A list of comments made by the user with the given id
     :doc-author: Trelent
     """
     user = db.query(User).filter(
@@ -156,6 +154,8 @@ async def change_comment(
 ):
     """
     The change_comment function allows a user to change the text of their comment.
+        
+        
     
     :param body: PutCommentReques: Get the new text for the comment
     :param db: Session: Get a database session
@@ -196,8 +196,10 @@ async def delete_comment(
 ):
     """
     The delete_comment function deletes a comment from the database.
+        
+        
     
-    :param comment_id: int: Specify the id of the comment to be deleted
+    :param comment_id: int: Specify the id of the comment to be edited
     :param db: Session: Get a database session
     :param current_user: User: Get the current user from the database
     :return: The deleted comment

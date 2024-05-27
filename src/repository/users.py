@@ -15,7 +15,7 @@ async def get_user_by_email(email: str, db: Session) -> User:
     HTTPException.
     
     :param email: str: Pass in the email of the user we want to get
-    :param db: Session: Pass the database session to the function
+    :param db: Session: Pass in the database session to the function
     :return: The first user found with the email address provided
     :doc-author: Trelent
     """
@@ -98,10 +98,11 @@ async def get_user_by_username(username: str, db: Session) -> User:
     The get_user_by_username function takes in a username and a database session,
     and returns the user with that username. If no such user exists, it raises a
     HTTPException.
-
-    :param username: str: The username of the user we want to get
-    :param db: Session: The database session
-    :return: The user object if found, None otherwise
+    
+    :param username: str: Specify the username of the user we want to get
+    :param db: Session: Pass in the database session
+    :return: The user with the given username
+    :doc-author: Trelent
     """
     return db.query(User).filter(User.username == username).first()
 
@@ -109,11 +110,11 @@ async def get_user_by_username(username: str, db: Session) -> User:
 async def update_user(user_id: int, user_update: UserUpdate, db: Session) -> User:
     """
     The update_user function updates a user's information in the database.
-
-    :param user_id: int: The ID of the user to update
-    :param user_update: UserUpdate: The new user data
-    :param db: Session: The database session
-    :return: The updated user object, or None if the user was not found
+    
+    :param user_id: int: Specify which user to update
+    :param user_update: UserUpdate: Pass in the new user data
+    :param db: Session: Access the database
+    :return: The updated user object, or none if the user was not found
     :doc-author: Trelent
     """
     user = db.query(User).filter(User.id == user_id).first()
@@ -127,11 +128,10 @@ async def update_user(user_id: int, user_update: UserUpdate, db: Session) -> Use
     return user
 
 async def get_user_by_id(user_id: int, db: Session = next(get_db())) -> User:
-    
     """
     The get_user_by_id function takes in a user_id and a database session,
-    and returns the User object associated with that id. If no such user exists,
-    it raises an HTTPException.
+        and returns the User object associated with that id. If no such user exists,
+        it raises an HTTPException.
     
     :param user_id: int: Specify the type of data that is expected to be passed into the function
     :param db: Session: Pass the database session to the function
@@ -141,6 +141,19 @@ async def get_user_by_id(user_id: int, db: Session = next(get_db())) -> User:
     return db.query(User).filter(User.id == user_id).first()
 
 async def add_first_user_admin(username: str, email: str, password: str, db: Session = next(get_db())) -> None:
+    """
+    The add_first_user_admin function is used to add the first user to the database.
+        This function will only work if there are no users in the database.
+        The function takes a username, email, and password as arguments and adds them to a new User object. 
+        The new User object is then added to the database using SQLAlchemy's db session.
+    
+    :param username: str: Pass in the username of the user
+    :param email: str: Specify the email address of the user
+    :param password: str: Get the password from the user
+    :param db: Session: Pass in the database session
+    :return: None
+    :doc-author: Trelent
+    """
     hash_password = auth_service.get_password_hash(password)
     new_user = User(id=1, username=username, email=email, password=hash_password, confirmed=True, role="admin", avatar=None)
     db.add(new_user)

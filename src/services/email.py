@@ -25,14 +25,14 @@ conf = ConnectionConfig(
 async def send_email(email: EmailStr, username: str, host: str):
     """
     The send_email function sends an email to the user with a link to confirm their email address.
-        The function takes in three parameters:
-            1) An EmailStr object that contains the user's email address.
-            2) A string containing the username of the user who is registering for an account.  This will be used in a template message sent to them via FastMail API.
-            3) A string containing the hostname of this server, which will be used as part of a URL that is sent to them via FastMail API.
+            The function takes in three parameters:
+                1) An EmailStr object that contains the user's email address.
+                2) A string containing the username of the user who is registering for an account.  This will be used in a template message sent to them via FastMail API.
+                3) A string containing the hostname of this server, which will be used as part of a URL that is sent to them via FastMail API.
     
     :param email: EmailStr: Specify the email address of the recipient
     :param username: str: Pass the username to the email template
-    :param host: str: Pass the host name to the email template
+    :param host: str: Pass the hostname of this server to the email template
     :return: A coroutine object
     :doc-author: Trelent
     """

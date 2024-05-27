@@ -21,7 +21,7 @@ async def read_users_me(current_user: User = Depends(auth_service.get_current_us
         This function will return an error if there is no logged in user.
     
     :param current_user: User: Get the current user
-    :return: The current user object
+    :return: The current user's information
     :doc-author: Trelent
     """
     return current_user
@@ -59,10 +59,13 @@ async def update_avatar_user(file: UploadFile = File(), current_user: User = Dep
 @router.get("/{username}", response_model=UserDb)
 async def get_user_by_username(username: str, db: Session = Depends(get_db)):
     """
-    Get user profile by unique username.
-    :param username: str: The unique username of the user
-    :param db: Session: The database session
-    :return: UserDb: The user profile information
+    The get_user_by_username function is used to get a user profile by unique username.
+        
+    
+    :param username: str: Specify the username of the user to be retrieved
+    :param db: Session: Pass the database session to the function
+    :return: A userdb object
+    :doc-author: Trelent
     """
     user = await repository_users.get_user_by_username(username, db)
     if not user:
@@ -75,10 +78,10 @@ async def update_my_profile(user_update: UserUpdate, db: Session = Depends(get_d
                             current_user: User = Depends(auth_service.get_current_user)):
     """
     The update_my_profile function allows the current user to update their own profile information.
-
-    :param user_update: UserUpdate: The new user data
-    :param db: Session: The database session
-    :param current_user: User: The current logged in user
+    
+    :param user_update: UserUpdate: Get the new user data
+    :param db: Session: Pass the database session to the function
+    :param current_user: User: Get the current logged in user
     :return: The updated user object
     :doc-author: Trelent
     """

@@ -26,7 +26,7 @@ async def transform_image(
     :param transform_params: dict: Pass in the transformation parameters
     :param description: str: Set the description of the new image
     :param db: Session: Access the database
-    :param current_user: User: Get the current user's id
+    :param current_user: User: Get the user's id
     :param service: cloudinary: Pass in the cloudinary library
     :return: A new image with the transformation applied
     :doc-author: Trelent

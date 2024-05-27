@@ -17,15 +17,13 @@ async def rate_image(
         current_user: User = Depends(auth_service.get_current_user)
 ):
     """
-    Create a new rating for an image by a user.
-
-    Args:
-        rating (RatingCreate): The data for creating a new rating.
-        db (Session): Database session.
-        current_user (User): The current user creating the rating.
-
-    Returns:
-        RatingResponse: The created rating.
+    The rate_image function creates a new rating for an image by a user.
+    
+    :param rating: RatingCreate: Create a new rating
+    :param db: Session: Pass the database session to the function
+    :param current_user: User: Get the current user
+    :return: A ratingresponse object
+    :doc-author: Trelent
     """
     image = db.query(Post).filter(Post.id == rating.image_id).first()
     if not image:
@@ -42,15 +40,13 @@ async def get_image_ratings(
         current_user: User = Depends(auth_service.get_current_user)
 ):
     """
-    Get all ratings for a specific image.
-
-    Args:
-        image_id (int): ID of the image.
-        db (Session): Database session.
-        current_user (User): The current user.
-
-    Returns:
-        List[RatingResponse]: List of ratings for the image.
+    The get_image_ratings function returns a list of ratings for a specific image.
+    
+    :param image_id: int: Specify the id of the image
+    :param db: Session: Pass in the database session
+    :param current_user: User: Get the current user
+    :return: A list of ratingresponse objects
+    :doc-author: Trelent
     """
     ratings = await get_ratings(db, image_id)
     return ratings
@@ -63,15 +59,13 @@ async def delete_image_rating(
         current_user: User = Depends(auth_service.get_current_user)
 ):
     """
-    Delete a rating by ID.
-
-    Args:
-        rating_id (int): ID of the rating to delete.
-        db (Session): Database session.
-        current_user (User): The current user performing the delete action.
-
-    Returns:
-        dict: Confirmation message.
+    The delete_image_rating function deletes a rating by ID.
+    
+    :param rating_id: int: Identify the rating to be deleted
+    :param db: Session: Access the database
+    :param current_user: User: Ensure that the user performing the action is logged in
+    :return: A dict
+    :doc-author: Trelent
     """
     response = await delete_rating(db, rating_id, current_user)
     return response
@@ -84,15 +78,13 @@ async def get_average_rating(
         current_user: User = Depends(auth_service.get_current_user)
 ):
     """
-    Get the average rating for an image.
-
-    Args:
-        image_id (int): ID of the image.
-        db (Session): Database session.
-        current_user (User): The current user making the request.
-
-    Returns:
-        float: The average rating for the image.
+    The get_average_rating function returns the average rating for an image.
+    
+    :param image_id: int: Specify the id of the image
+    :param db: Session: Get the database session
+    :param current_user: User: Get the current user making the request
+    :return: The average rating for an image
+    :doc-author: Trelent
     """
     average_rating = calculate_average_rating(db, image_id)
     return average_rating
