@@ -1,6 +1,6 @@
 import pytest
 import pytest_asyncio
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, Mock
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -98,5 +98,27 @@ def mock_get_qr_code_by_url(mocker):
     async_mock = AsyncMock(return_value="qr_code_url_responce")
     mocker.patch(
         'src.utils.image_utils.get_qr_code_by_url',
+        side_effect=async_mock
+    )
+
+
+@pytest.fixture()
+def mock_cloudinary_uploader(mocker):
+    mocker.patch("src.routes.users.cloudinary.uploader")
+
+
+@pytest.fixture()
+def mock_cloudinary_build_url(mocker):
+    mock = Mock(return_value="avatar_url")
+    mocker.patch(
+        "src.routes.users.cloudinary.CloudinaryImage.build_url",
+        side_effect=mock
+    )
+
+@pytest.fixture()
+def mock_update_user(mocker):
+    async_mock = AsyncMock(return_value=None)
+    mocker.patch(
+        "src.routes.users.repository_users.update_user",
         side_effect=async_mock
     )
