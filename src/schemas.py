@@ -120,3 +120,8 @@ class RoundCornersImageRequest(BaseModel):
 class EffectImageRequest(BaseModel):
     image_id: int
     description: str
+
+class FirstAdminModel(UserModel):
+    id: int = 1
+    role: UserRole = UserRole.admin
+    password: str

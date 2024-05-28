@@ -2,7 +2,7 @@ from libgravatar import Gravatar
 from sqlalchemy.orm import Session
 
 from src.database.models import User
-from src.schemas import UserModel, UserUpdate
+from src.schemas import UserModel, UserUpdate, FirstAdminModel
 
 
 async def get_user_by_email(email: str, db: Session) -> User:
@@ -19,13 +19,13 @@ async def get_user_by_email(email: str, db: Session) -> User:
     return db.query(User).filter(User.email == email).first()
 
 
-async def create_user(body: UserModel, db: Session) -> User:
+async def create_user(body: UserModel|FirstAdminModel, db: Session) -> User:
     """
     The create_user function creates a new user in the database.
     It takes a UserModel object as input and returns a User object.
     
     
-    :param body: UserModel: Pass the user data from the request body to create_user
+    :param body: UserModel|FirstAdminModel: Pass the user data from the request body to create_user
     :param db: Session: Pass the database session to the function
     :return: A user object
     :doc-author: Trelent
@@ -123,3 +123,16 @@ async def update_user(user_id: int, user_update: UserUpdate, db: Session) -> Use
     db.commit()
     db.refresh(user)
     return user
+
+async def is_users_table_empty(db: Session) -> bool:
+    """
+    The is_users_table_empty function checks if the users table is empty.
+        Args:
+            db (Session): The database session object.
+    
+    :param db: Session: Pass the database session to the function
+    :return: True if the users table is empty
+    :doc-author: Trelent
+    """
+    record = db.query(User).first()
+    return record is None
