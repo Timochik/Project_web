@@ -41,21 +41,6 @@
 <section id="module-main">
 <span id="photoshare-main"></span><h1>PhotoShare main<a class="headerlink" href="#module-main" title="Link to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="main.main">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.main" title="Link to this definition">¶</a></dt>
-<dd><p>The main function is the entry point for this application.
-It creates an instance of FastAPI, and then starts a Uvicorn server with it.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A coroutine</p>
-</dd>
-<dt class="field-even">Doc-author<span class="colon">:</span></dt>
-<dd class="field-even"><p>Trelent</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="main.read_root">
 <span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">read_root</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.read_root" title="Link to this definition">¶</a></dt>
 <dd><p>The read_root function is a function that returns the string &amp;quot;Hello World&amp;quot;
@@ -202,9 +187,9 @@ If it is provided, then we’ll use its value as our new description for this po
 </dd></dl>
 
 </section>
-<section id="photoshare-repository-ratings">
-<h1>PhotoShare repository ratings<a class="headerlink" href="#photoshare-repository-ratings" title="Link to this heading">¶</a></h1>
-<dl class="py function" id="module-src.repository.ratings">
+<section id="module-src.repository.ratings">
+<span id="photoshare-repository-ratings"></span><h1>PhotoShare repository ratings<a class="headerlink" href="#module-src.repository.ratings" title="Link to this heading">¶</a></h1>
+<dl class="py function">
 <dt class="sig sig-object py" id="src.repository.ratings.calculate_average_rating">
 <span class="sig-prename descclassname"><span class="pre">src.repository.ratings.</span></span><span class="sig-name descname"><span class="pre">calculate_average_rating</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.repository.ratings.calculate_average_rating" title="Link to this definition">¶</a></dt>
 <dd><p>The calculate_average_rating function calculates the average rating for a specific image.</p>
@@ -314,33 +299,6 @@ If it is provided, then we’ll use its value as our new description for this po
 <section id="module-src.repository.users">
 <span id="photoshare-repository-users"></span><h1>PhotoShare repository users<a class="headerlink" href="#module-src.repository.users" title="Link to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.repository.users.add_first_user_admin">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">add_first_user_admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db:</span> <span class="pre">~sqlalchemy.orm.session.Session</span> <span class="pre">=</span> <span class="pre">&lt;sqlalchemy.orm.session.Session</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.users.add_first_user_admin" title="Link to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>The add_first_user_admin function is used to add the first user to the database.</dt><dd><p>This function will only work if there are no users in the database.
-The function takes a username, email, and password as arguments and adds them to a new User object. 
-The new User object is then added to the database using SQLAlchemy’s db session.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>username</strong> – str: Pass in the username of the user</p></li>
-<li><p><strong>email</strong> – str: Specify the email address of the user</p></li>
-<li><p><strong>password</strong> – str: Get the password from the user</p></li>
-<li><p><strong>db</strong> – Session: Pass in the database session</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="src.repository.users.confirmed_email">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">confirmed_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.users.confirmed_email" title="Link to this definition">¶</a></dt>
 <dd><p>The confirmed_email function takes an email and a database session as arguments.
@@ -364,13 +322,13 @@ and commits those changes to the database.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.repository.users.create_user">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UserModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span></span></span><a class="headerlink" href="#src.repository.users.create_user" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UserModel</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">FirstAdminModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span></span></span><a class="headerlink" href="#src.repository.users.create_user" title="Link to this definition">¶</a></dt>
 <dd><p>The create_user function creates a new user in the database.
 It takes a UserModel object as input and returns a User object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> – UserModel: Pass the user data from the request body to create_user</p></li>
+<li><p><strong>body</strong> – UserModel|FirstAdminModel: Pass the user data from the request body to create_user</p></li>
 <li><p><strong>db</strong> – Session: Pass the database session to the function</p></li>
 </ul>
 </dd>
@@ -406,30 +364,6 @@ HTTPException.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.repository.users.get_user_by_id">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">get_user_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db:</span> <span class="pre">~sqlalchemy.orm.session.Session</span> <span class="pre">=</span> <span class="pre">&lt;sqlalchemy.orm.session.Session</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span></span></span><a class="headerlink" href="#src.repository.users.get_user_by_id" title="Link to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>The get_user_by_id function takes in a user_id and a database session,</dt><dd><p>and returns the User object associated with that id. If no such user exists,
-it raises an HTTPException.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>user_id</strong> – int: Specify the type of data that is expected to be passed into the function</p></li>
-<li><p><strong>db</strong> – Session: Pass the database session to the function</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A query object</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="src.repository.users.get_user_by_username">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">get_user_by_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span></span></span><a class="headerlink" href="#src.repository.users.get_user_by_username" title="Link to this definition">¶</a></dt>
 <dd><p>The get_user_by_username function takes in a username and a database session,
@@ -444,6 +378,29 @@ HTTPException.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The user with the given username</p>
+</dd>
+<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Trelent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.repository.users.is_users_table_empty">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">is_users_table_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#src.repository.users.is_users_table_empty" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The is_users_table_empty function checks if the users table is empty.</dt><dd><dl class="simple">
+<dt>Args:</dt><dd><p>db (Session): The database session object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>db</strong> – Session: Pass the database session to the function</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the users table is empty</p>
 </dd>
 <dt class="field-odd">Doc-author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Trelent</p>
@@ -686,23 +643,21 @@ email address. It then checks if there is already a confirmed account associated
 <dt class="sig sig-object py" id="src.routes.auth.signup">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.auth.</span></span><span class="sig-name descname"><span class="pre">signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UserModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_tasks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BackgroundTasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.auth.signup" title="Link to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>The signup function creates a new user in the database.</dt><dd><p>It takes a UserModel object as input, which contains the username and email of the new user.
-The function then checks if an account with that email already exists, and if so raises an exception.
-If not, it hashes the password using auth_service’s get_password_hash() function (which uses Argon2), 
-then creates a new user in our database using repository_users’ create_user() function.</p>
+<dt>The signup function creates a new user in the database.</dt><dd><p>It takes a UserModel object as input, and returns an HTTP response with the newly created user’s information.
+If there are no users in the database, it will create an admin account instead of a regular user account.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>body</strong> – UserModel: Get the data from the request body</p></li>
+<li><p><strong>body</strong> – UserModel: Get the user’s email and password</p></li>
 <li><p><strong>background_tasks</strong> – BackgroundTasks: Add a task to the background tasks queue</p></li>
-<li><p><strong>request</strong> – Request: Get the base_url of the server, which is used to generate a link for email verification</p></li>
-<li><p><strong>db</strong> – Session: Get the database session</p></li>
+<li><p><strong>request</strong> – Request: Get the base url of the application</p></li>
+<li><p><strong>db</strong> – Session: Get a database session</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary with the user and a message</p>
+<dd class="field-even"><p>A dictionary with two keys: user and detail</p>
 </dd>
 <dt class="field-odd">Doc-author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Trelent</p>
@@ -711,9 +666,9 @@ then creates a new user in our database using repository_users’ create_user() 
 </dd></dl>
 
 </section>
-<section id="photoshare-routes-comments">
-<h1>PhotoShare routes comments<a class="headerlink" href="#photoshare-routes-comments" title="Link to this heading">¶</a></h1>
-<dl class="py function" id="module-src.routes.comments">
+<section id="module-src.routes.comments">
+<span id="photoshare-routes-comments"></span><h1>PhotoShare routes comments<a class="headerlink" href="#module-src.routes.comments" title="Link to this heading">¶</a></h1>
+<dl class="py function">
 <dt class="sig sig-object py" id="src.routes.comments.change_comment">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.routes.comments.</span></span><span class="sig-name descname"><span class="pre">change_comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PutCommentReques</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.routes.comments.change_comment" title="Link to this definition">¶</a></dt>
 <dd><p>The change_comment function allows a user to change the text of their comment.</p>
@@ -1605,70 +1560,6 @@ If file not founr raises FileNotFoundError error.</p>
 </dd></dl>
 
 </section>
-<section id="module-src.utils.users">
-<span id="photoshare-utils-users"></span><h1>PhotoShare utils users<a class="headerlink" href="#module-src.utils.users" title="Link to this heading">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.utils.users.add_first_user_admin">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.users.</span></span><span class="sig-name descname"><span class="pre">add_first_user_admin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.users.add_first_user_admin" title="Link to this definition">¶</a></dt>
-<dd><p>The add_first_user_admin function is used to add the first user to the database.
-This function will be called when there are no users in the database, and it will
-prompt for a username, email address, and password. The email address must be valid
-and both passwords must match.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None, but it does add a user to the database</p>
-</dd>
-<dt class="field-even">Doc-author<span class="colon">:</span></dt>
-<dd class="field-even"><p>Trelent</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.utils.users.get_input">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.users.</span></span><span class="sig-name descname"><span class="pre">get_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.users.get_input" title="Link to this definition">¶</a></dt>
-<dd><p>The get_input function is a coroutine that prompts the user for input.
-It takes two arguments:
-prompt - The string to display to the user when asking for input.
-validate - A callable that will be passed the value entered by the user, and should raise an exception if it’s invalid. If no exception is raised, then it’s assumed to be valid.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>prompt</strong> – str: Prompt the user for input</p></li>
-<li><p><strong>validate</strong> – callable: Validate the input</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A coroutine object</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.utils.users.validate_passwords">
-<span class="sig-prename descclassname"><span class="pre">src.utils.users.</span></span><span class="sig-name descname"><span class="pre">validate_passwords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.users.validate_passwords" title="Link to this definition">¶</a></dt>
-<dd><p>The validate_passwords function takes two arguments, password and password2.
-It raises a ValueError if the passwords do not match.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>password</strong> – str: Specify the type of data that is expected to be passed into the function</p></li>
-<li><p><strong>password2</strong> – str: Make sure that the password and password2 are the same</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A valueerror if the passwords do not match</p>
-</dd>
-<dt class="field-odd">Doc-author<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Trelent</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
 <ul class="simple">
@@ -1690,7 +1581,6 @@ It raises a ValueError if the passwords do not match.</p>
     <ul>
 <li><a class="reference internal" href="#">Welcome to PhotoShare’s documentation!</a></li>
 <li><a class="reference internal" href="#module-main">PhotoShare main</a><ul>
-<li><a class="reference internal" href="#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li><a class="reference internal" href="#main.read_root"><code class="docutils literal notranslate"><span class="pre">read_root()</span></code></a></li>
 </ul>
 </li>
@@ -1702,7 +1592,7 @@ It raises a ValueError if the passwords do not match.</p>
 <li><a class="reference internal" href="#src.repository.images.put_image"><code class="docutils literal notranslate"><span class="pre">put_image()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#photoshare-repository-ratings">PhotoShare repository ratings</a><ul>
+<li><a class="reference internal" href="#module-src.repository.ratings">PhotoShare repository ratings</a><ul>
 <li><a class="reference internal" href="#src.repository.ratings.calculate_average_rating"><code class="docutils literal notranslate"><span class="pre">calculate_average_rating()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.ratings.create_rating"><code class="docutils literal notranslate"><span class="pre">create_rating()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.ratings.delete_rating"><code class="docutils literal notranslate"><span class="pre">delete_rating()</span></code></a></li>
@@ -1714,12 +1604,11 @@ It raises a ValueError if the passwords do not match.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-src.repository.users">PhotoShare repository users</a><ul>
-<li><a class="reference internal" href="#src.repository.users.add_first_user_admin"><code class="docutils literal notranslate"><span class="pre">add_first_user_admin()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.users.confirmed_email"><code class="docutils literal notranslate"><span class="pre">confirmed_email()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.users.create_user"><code class="docutils literal notranslate"><span class="pre">create_user()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.users.get_user_by_email"><code class="docutils literal notranslate"><span class="pre">get_user_by_email()</span></code></a></li>
-<li><a class="reference internal" href="#src.repository.users.get_user_by_id"><code class="docutils literal notranslate"><span class="pre">get_user_by_id()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.users.get_user_by_username"><code class="docutils literal notranslate"><span class="pre">get_user_by_username()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.is_users_table_empty"><code class="docutils literal notranslate"><span class="pre">is_users_table_empty()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.users.update_avatar"><code class="docutils literal notranslate"><span class="pre">update_avatar()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.users.update_token"><code class="docutils literal notranslate"><span class="pre">update_token()</span></code></a></li>
 <li><a class="reference internal" href="#src.repository.users.update_user"><code class="docutils literal notranslate"><span class="pre">update_user()</span></code></a></li>
@@ -1739,7 +1628,7 @@ It raises a ValueError if the passwords do not match.</p>
 <li><a class="reference internal" href="#src.routes.auth.signup"><code class="docutils literal notranslate"><span class="pre">signup()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#photoshare-routes-comments">PhotoShare routes comments</a><ul>
+<li><a class="reference internal" href="#module-src.routes.comments">PhotoShare routes comments</a><ul>
 <li><a class="reference internal" href="#src.routes.comments.change_comment"><code class="docutils literal notranslate"><span class="pre">change_comment()</span></code></a></li>
 <li><a class="reference internal" href="#src.routes.comments.delete_comment"><code class="docutils literal notranslate"><span class="pre">delete_comment()</span></code></a></li>
 <li><a class="reference internal" href="#src.routes.comments.get_comment"><code class="docutils literal notranslate"><span class="pre">get_comment()</span></code></a></li>
@@ -1806,12 +1695,6 @@ It raises a ValueError if the passwords do not match.</p>
 <li><a class="reference internal" href="#module-src.utils.qr_code">PhotoShare utils qr_code</a><ul>
 <li><a class="reference internal" href="#src.utils.qr_code.delete_qr_code_by_url"><code class="docutils literal notranslate"><span class="pre">delete_qr_code_by_url()</span></code></a></li>
 <li><a class="reference internal" href="#src.utils.qr_code.get_qr_code_by_url"><code class="docutils literal notranslate"><span class="pre">get_qr_code_by_url()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-src.utils.users">PhotoShare utils users</a><ul>
-<li><a class="reference internal" href="#src.utils.users.add_first_user_admin"><code class="docutils literal notranslate"><span class="pre">add_first_user_admin()</span></code></a></li>
-<li><a class="reference internal" href="#src.utils.users.get_input"><code class="docutils literal notranslate"><span class="pre">get_input()</span></code></a></li>
-<li><a class="reference internal" href="#src.utils.users.validate_passwords"><code class="docutils literal notranslate"><span class="pre">validate_passwords()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
