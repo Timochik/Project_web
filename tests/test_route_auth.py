@@ -4,7 +4,9 @@ from src.services.auth import auth_service
 
 
 def test_create_user(client, user, session, monkeypatch):
-    existed_user = session.query(User).filter(User.email == user["email"]).first()
+    existed_user = session.query(User).filter(
+        User.email == user["email"]
+    ).first()
     session.delete(existed_user)
     session.commit()
 
@@ -102,7 +104,8 @@ def test_refresh_token(client, session, user):
 
 
 def test_refresh_wrong_token(client, session, user):
-    current_user: User = session.query(User).filter(User.email == user.get('email')).first()
+    current_user: User = session.query(User).filter(
+        User.email == user['email']).first()
     refresh_token = current_user.refresh_token
     current_user.refresh_token = None
     session.commit()
@@ -130,7 +133,8 @@ def test_already_confirmed_email(client, user):
 
 
 def test_confirmed_email(client, session, user):
-    current_user: User = session.query(User).filter(User.email == user.get('email')).first()
+    current_user: User = session.query(User).filter(
+        User.email == user['email']).first()
     current_user.confirmed = False
     session.commit()
 
