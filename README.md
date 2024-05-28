@@ -112,10 +112,10 @@ This project exposes 30+ endpoints through a REST API. To access these APIs, use
 
 <div align="">
   <p>Scrum Master, developer: <a href="https://github.com/olhalialina">Olha lialina</a></p>
-  <p>Team Lead, developer: <a href="https://github.com/Nyambevos">Ruslan Bilokoniok</a></p>
+  <p>Team Lead, developer: <a href="https://github.com/Nyambevos">Ruslan Bilokoniuk</a></p>
   <p>Developer: <a href="https://github.com/andrii-trebukh">Andrii Trebukh</a></p>
-  <p>Developer: <a href="https://github.com/Y3vh3n11">Eugene Vlasenko</a></p>
-  <p>Developer: <a href="https://github.com/Timochik">Timothy</a></p>
+  <p>Developer: <a href="https://github.com/Y3vh3n11">Yevhenii Vlasenko</a></p>
+  <p>Developer: <a href="https://github.com/Timochik">Tymofii Svyrhun</a></p>
 </div>
 
 ## License 
