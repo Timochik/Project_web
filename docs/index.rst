@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to PhotoShare's documentation!
-====================================
+=======================================
 
 .. toctree::
   :maxdepth: 2
@@ -28,7 +28,7 @@ PhotoShare repository images
 
 
 PhotoShare repository ratings
-============================
+==============================
 .. automodule:: src.repository.ratings
   :members:
   :undoc-members:
@@ -68,7 +68,7 @@ PhotoShare routes auth
 
 
 PhotoShare routes comments
-=========================
+===========================
 .. automodule:: src.routes.comments
   :members:
   :undoc-members:
@@ -126,14 +126,6 @@ PhotoShare utils image_utils
 PhotoShare utils qr_code
 =========================
 .. automodule:: src.utils.qr_code
-  :members:
-  :undoc-members:
-  :show-inheritance:
-
-
-PhotoShare utils users
-=========================
-.. automodule:: src.utils.users
   :members:
   :undoc-members:
   :show-inheritance:

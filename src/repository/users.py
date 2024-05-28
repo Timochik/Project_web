@@ -1,10 +1,8 @@
 from libgravatar import Gravatar
 from sqlalchemy.orm import Session
 
-from src.database.db import get_db
 from src.database.models import User
-from src.schemas import UserModel, UserUpdate
-from src.services.auth import auth_service
+from src.schemas import UserModel, UserUpdate, FirstAdminModel
 
 
 async def get_user_by_email(email: str, db: Session) -> User:
@@ -21,13 +19,13 @@ async def get_user_by_email(email: str, db: Session) -> User:
     return db.query(User).filter(User.email == email).first()
 
 
-async def create_user(body: UserModel, db: Session) -> User:
+async def create_user(body: UserModel|FirstAdminModel, db: Session) -> User:
     """
     The create_user function creates a new user in the database.
     It takes a UserModel object as input and returns a User object.
     
     
-    :param body: UserModel: Pass the user data from the request body to create_user
+    :param body: UserModel|FirstAdminModel: Pass the user data from the request body to create_user
     :param db: Session: Pass the database session to the function
     :return: A user object
     :doc-author: Trelent
@@ -126,35 +124,15 @@ async def update_user(user_id: int, user_update: UserUpdate, db: Session) -> Use
     db.refresh(user)
     return user
 
-async def get_user_by_id(user_id: int, db: Session = next(get_db())) -> User:
+async def is_users_table_empty(db: Session) -> bool:
     """
-    The get_user_by_id function takes in a user_id and a database session,
-        and returns the User object associated with that id. If no such user exists,
-        it raises an HTTPException.
+    The is_users_table_empty function checks if the users table is empty.
+        Args:
+            db (Session): The database session object.
     
-    :param user_id: int: Specify the type of data that is expected to be passed into the function
     :param db: Session: Pass the database session to the function
-    :return: A query object
+    :return: True if the users table is empty
     :doc-author: Trelent
     """
-    return db.query(User).filter(User.id == user_id).first()
-
-async def add_first_user_admin(username: str, email: str, password: str, db: Session = next(get_db())) -> None:
-    """
-    The add_first_user_admin function is used to add the first user to the database.
-        This function will only work if there are no users in the database.
-        The function takes a username, email, and password as arguments and adds them to a new User object. 
-        The new User object is then added to the database using SQLAlchemy's db session.
-    
-    :param username: str: Pass in the username of the user
-    :param email: str: Specify the email address of the user
-    :param password: str: Get the password from the user
-    :param db: Session: Pass in the database session
-    :return: None
-    :doc-author: Trelent
-    """
-    hash_password = auth_service.get_password_hash(password)
-    new_user = User(id=1, username=username, email=email, password=hash_password, confirmed=True, role="admin", avatar=None)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
+    record = db.query(User).first()
+    return record is None

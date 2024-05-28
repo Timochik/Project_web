@@ -1,11 +1,8 @@
 import uvicorn
-import asyncio
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from src.repository.users import get_user_by_id
-from src.utils.users import add_first_user_admin
 from src.routes import auth, users, admin, images, comments, ratings
 
 
@@ -31,20 +28,5 @@ def read_root(request: Request):
     """
     return templates.TemplateResponse("index.html", {"request": request})
 
-async def main():
-    """
-    The main function is the entry point for this application.
-    It creates an instance of FastAPI, and then starts a Uvicorn server with it.
-    
-    
-    :return: A coroutine
-    :doc-author: Trelent
-    """
-    admin = await get_user_by_id(user_id=1)
-    if not admin:
-        await add_first_user_admin()
-
-
 if __name__ == "__main__":
-    asyncio.run(main())
     uvicorn.run('main:app', host="localhost", port=8000, reload=True)

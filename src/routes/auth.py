@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm, HTTPAuthorizationCredent
 from sqlalchemy.orm import Session
 
 from src.database.db import get_db
-from src.schemas import UserModel, UserResponse, TokenModel, RequestEmail
+from src.schemas import UserModel, UserResponse, TokenModel, RequestEmail, FirstAdminModel
 from src.repository import users as repository_users
 from src.services.auth import auth_service
 from src.services.email import send_email
@@ -16,23 +16,28 @@ security = HTTPBearer()
 async def signup(body: UserModel, background_tasks: BackgroundTasks, request: Request, db: Session = Depends(get_db)):
     """
     The signup function creates a new user in the database.
-            It takes a UserModel object as input, which contains the username and email of the new user.
-            The function then checks if an account with that email already exists, and if so raises an exception.
-            If not, it hashes the password using auth_service's get_password_hash() function (which uses Argon2), 
-            then creates a new user in our database using repository_users' create_user() function.
+        It takes a UserModel object as input, and returns an HTTP response with the newly created user's information.
+        If there are no users in the database, it will create an admin account instead of a regular user account.
     
-    :param body: UserModel: Get the data from the request body
+    :param body: UserModel: Get the user's email and password
     :param background_tasks: BackgroundTasks: Add a task to the background tasks queue
-    :param request: Request: Get the base_url of the server, which is used to generate a link for email verification
-    :param db: Session: Get the database session
-    :return: A dictionary with the user and a message
+    :param request: Request: Get the base url of the application
+    :param db: Session: Get a database session
+    :return: A dictionary with two keys: user and detail
     :doc-author: Trelent
     """
-    exist_user = await repository_users.get_user_by_email(body.email, db)
-    if exist_user:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Account already exists")
-    body.password = auth_service.get_password_hash(body.password)
-    new_user = await repository_users.create_user(body, db)
+    if await repository_users.is_users_table_empty(db):
+        admin_body = FirstAdminModel(
+            username=body.username,
+            email=body.email,
+            password=auth_service.get_password_hash(body.password))
+        new_user = await repository_users.create_user(admin_body, db)
+    else:
+        exist_user = await repository_users.get_user_by_email(body.email, db)
+        if exist_user:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Account already exists")
+        body.password = auth_service.get_password_hash(body.password)
+        new_user = await repository_users.create_user(body, db)
     background_tasks.add_task(send_email, new_user.email, new_user.username, request.base_url)
     return {"user": new_user, "detail": "User successfully created. Check your email for confirmation."}
 
