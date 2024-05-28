@@ -30,9 +30,21 @@ test_user = {
 }
 
 
+second_test_user = {
+    "username": "ajax",
+    "email": "francis.freeman@example.com",
+    "password": "87654321"
+}
+
+
 @pytest.fixture(scope="module")
 def user():
     return test_user
+
+
+@pytest.fixture(scope="module")
+def second_user():
+    return second_test_user
 
 
 @pytest_asyncio.fixture
