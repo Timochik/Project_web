@@ -4,7 +4,7 @@ import cloudinary
 from src.utils.qr_code import get_qr_code_by_url, delete_qr_code_by_url
 
 
-class TestUsers(unittest.IsolatedAsyncioTestCase):
+class TestQrCode(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
         self.service = MagicMock(spec=cloudinary)
 

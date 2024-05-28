@@ -16,7 +16,7 @@ from src.services.auth import (
 )
 
 
-class TestUsers(unittest.IsolatedAsyncioTestCase):
+class TestAuth(unittest.IsolatedAsyncioTestCase):
     SECRET_KEY = "secret_key"
     ALGORITHM = "HS256"
 

@@ -7,7 +7,7 @@ from src.utils.image_utils import transform_image
 from src.database.models import User, Post
 
 
-class TestUsers(unittest.IsolatedAsyncioTestCase):
+class TestImageUtils(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
         self.service = MagicMock(spec=cloudinary)
         self.session = MagicMock(spec=Session)
